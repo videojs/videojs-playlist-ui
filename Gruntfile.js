@@ -1,5 +1,7 @@
 'use strict';
 
+var loadGruntTasks = require('load-grunt-tasks');
+
 module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -12,11 +14,33 @@ module.exports = function(grunt) {
     },
     uglify: {
       options: {
-        banner: '<%= banner %>'
+        banner: '<%= banner %>',
+        report: 'gzip'
       },
       dist: {
-        src: '<%= browserify.dev.dest %>',
+        src: '<%= browserify.src.dest %>',
         dest: 'dist/<%= pkg.name %>.min.js'
+      }
+    },
+    less: {
+      dist: {
+        files: {
+          'dist/videojs-playlist-ui.vertical.no-prefix.css': 'lib/videojs-playlist-ui.vertical.less'
+        }
+      }
+    },
+    postcss: {
+      options: {
+        processors: [
+          require('autoprefixer-core')({
+            browsers: ['last 2 versions', 'ie 8', 'ie 9']
+          }),
+          require('postcss-pseudoelements')()
+        ]
+      },
+      dist: {
+        src: 'dist/videojs-playlist-ui.vertical.no-prefix.css',
+        dest: 'dist/videojs-playlist-ui.vertical.css'
       }
     },
     qunit: {
@@ -37,7 +61,7 @@ module.exports = function(grunt) {
       },
       test: {
         options: {
-          jshintrc: '.jshintrc'
+          jshintrc: 'test/.jshintrc'
         },
         src: ['test/**/*.js']
       }
@@ -48,12 +72,12 @@ module.exports = function(grunt) {
         tasks: ['jshint:gruntfile']
       },
       src: {
-        files: '<%= jshint.src.src %>',
-        tasks: ['jshint:src', 'qunit']
+        files: ['<%= jshint.src.src %>', 'lib/*.less'],
+        tasks: ['less', 'postcss', 'jshint:src', 'browserify:src', 'qunit']
       },
       test: {
         files: '<%= jshint.test.src %>',
-        tasks: ['jshint:test', 'qunit']
+        tasks: ['jshint:test', 'browserify:test', 'qunit']
       }
     },
     connect: {
@@ -68,29 +92,31 @@ module.exports = function(grunt) {
 
     browserify: {
       options: {
-        banner: '<%= banner %>'
+        banner: '<%= banner %>',
+        transform: [
+          'babelify'
+        ]
       },
-      dev: {
+      src: {
         src: ['lib/videojs-playlist-ui.js'],
         dest: 'dist/videojs-playlist-ui.js'
+      },
+      test: {
+        src: ['test/**/*.js'],
+        dest: 'dist/videojs-playlist-ui.test.js'
       }
     }
   });
 
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-connect');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-qunit');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-watch');
+  loadGruntTasks(grunt);
 
-  grunt.loadNpmTasks('grunt-browserify');
+  grunt.registerTask('build-js', ['browserify', 'uglify']);
+  grunt.registerTask('build-js:dist', ['browserify:src', 'uglify']);
+  grunt.registerTask('build-css', ['less', 'postcss']);
 
-  grunt.registerTask('default',
-                     ['clean',
-                      'jshint',
-                      'browserify',
-                      'qunit',
-                      'uglify']);
+  grunt.registerTask('build:dist', ['clean', 'build-js:dist', 'build-css']);
+  grunt.registerTask('build', ['clean', 'build-js', 'build-css']);
+  grunt.registerTask('test', ['build', 'jshint', 'qunit']);
+
+  grunt.registerTask('default', ['build', 'test']);
 };
