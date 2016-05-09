@@ -119,7 +119,7 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('build-js', ['babel', 'browserify', 'uglify']);
-  grunt.registerTask('build-js:dist', ['browserify:src', 'uglify']);
+  grunt.registerTask('build-js:dist', ['babel', 'browserify:src', 'uglify']);
   grunt.registerTask('build-css', ['less', 'postcss']);
 
   grunt.registerTask('build:dist', ['clean', 'build-js:dist', 'build-css']);
