@@ -34,7 +34,7 @@ Before this plugin will work at all, it needs an element in the DOM to which to 
 
 ### Default Implementation
 
-By default, the plugin will search for _the first element in the DOM with the `vjs-playlist` class.
+By default, the plugin will search for _the first element in the DOM with the `vjs-playlist` class_.
 
 > [See an example.](example.html)
 
