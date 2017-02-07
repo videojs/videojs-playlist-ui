@@ -22,6 +22,7 @@ env:
   - VJS=5
   - VJS=6
 addons:
+  firefox: latest
   apt:
     sources:
     - google-chrome
