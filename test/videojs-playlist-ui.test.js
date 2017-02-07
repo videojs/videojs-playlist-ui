@@ -44,7 +44,7 @@ const resolveUrl = url => {
   return a.href;
 };
 
-const Html5 = videojs.getComponent('Html5');
+const Html5 = videojs.getTech('Html5');
 
 test('the environment is sane', function() {
   ok(true, 'everything is swell');
