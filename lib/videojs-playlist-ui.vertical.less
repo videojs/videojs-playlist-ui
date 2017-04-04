@@ -224,6 +224,17 @@ during ads and capture click events on IE<11 */
   }
 }
 
+// If now playing / up next are shown, make sure there is room.
+// Only affects thumbnails with very wide aspect ratio, which get
+// stretched vertically. We could avoid the stretching by making this a
+// CSS background image and using background-size: cover; but then it'd
+// get clipped, so not sure that's better.
+@media (min-width: 521px) {
+  .vjs-playlist img {
+    min-height: 85px;
+  }
+}
+
 // Don't show duration when there isn't room
 @media (max-width: 750px) {
   .vjs-playlist .vjs-playlist-duration {
