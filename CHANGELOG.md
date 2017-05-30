@@ -5,8 +5,6 @@
 
 * Update tooling using generator v5 prerelease. ([#43](https://github.com/brightcove/videojs-playlist-ui/issues/43)) ([84475be](https://github.com/brightcove/videojs-playlist-ui/commit/84475be))
 
-# CHANGELOG
-
 ## 2.3.1
 
 * @misteroneill More complete documentation and examples [#32](https://github.com/brightcove/videojs-playlist-ui/pull/32)
