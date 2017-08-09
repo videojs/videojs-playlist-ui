@@ -1,6 +1,8 @@
 import document from 'global/document';
 import window from 'global/window';
 import videojs from 'video.js';
+import togglePlaylistButton from './components/togglePlaylistButton.js';
+import nextButton from './components/nextButton.js';
 
 // support VJS5 & VJS6 at the same time
 const dom = videojs.dom || videojs;
@@ -378,6 +380,16 @@ const playlistUi = function(options) {
   // build the playlist menu
   settings.el = elem;
   player.playlistMenu = new PlaylistMenu(player, settings);
+
+  //build the toggle playlist button
+  var buttonIndex = player.controlBar.children().map(function (c) {
+    return c.name();
+  }).indexOf('FullscreenToggle') - 1;
+  player.controlBar.playlistButton = player.controlBar.addChild('togglePlaylistButton', {}, buttonIndex);
+  player.controlBar.playlistButton.el().setAttribute('tabindex', 0);
+  player.controlBar.playlistButton.on('click', function(evt){
+    player.playlistMenu.toggleClass('vjs-hidden');
+  })
 };
 
 // register components
