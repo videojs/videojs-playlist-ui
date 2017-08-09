@@ -4,7 +4,6 @@
 
 import videojs from 'video.js';
 const Button = videojs.getComponent('ClickableComponent');
-const dom = videojs.dom || videojs;
 
 /**
  * Root button class for Debugger ButtonBar buttons

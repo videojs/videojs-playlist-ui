@@ -1,8 +1,6 @@
 import document from 'global/document';
 import window from 'global/window';
 import videojs from 'video.js';
-import togglePlaylistButton from './components/togglePlaylistButton.js';
-import nextButton from './components/nextButton.js';
 
 // support VJS5 & VJS6 at the same time
 const dom = videojs.dom || videojs;
@@ -196,6 +194,31 @@ class PlaylistMenuItem extends Component {
   }
 }
 
+class TogglePlaylistButton extends Component {
+
+  constructor(player, options) {
+    super(player, options);
+    this.el_.className = 'vjs-toggle-playlist';
+
+    // this.on(['tap','click'], this.handleClick);
+
+  }
+  createEl() {
+    return super.createEl('div', {
+      id: 'vjs-toggle-playlist',
+      innerHTML: '<button class="vjs-control vjs-button"><span class="vjs-icon-playlist-toggle" style="font-size:22px; padding:auto;" aria-hidden="true" value="Playlist Toggle"></span></button>'
+    });
+  }
+
+/**
+   * Handle click to toggle between open and closed
+   *
+   * @method handleClick
+   */
+  handleClick(event) {}
+
+}
+
 class PlaylistMenu extends Component {
 
   constructor(player, settings) {
@@ -381,20 +404,22 @@ const playlistUi = function(options) {
   settings.el = elem;
   player.playlistMenu = new PlaylistMenu(player, settings);
 
-  //build the toggle playlist button
-  var buttonIndex = player.controlBar.children().map(function (c) {
+  // build the toggle playlist button
+  const buttonIndex = player.controlBar.children().map(function(c) {
     return c.name();
   }).indexOf('FullscreenToggle') - 1;
-  player.controlBar.playlistButton = player.controlBar.addChild('togglePlaylistButton', {}, buttonIndex);
+
+  player.controlBar.playlistButton = player.controlBar.addChild('TogglePlaylistButton', {}, buttonIndex);
   player.controlBar.playlistButton.el().setAttribute('tabindex', 0);
-  player.controlBar.playlistButton.on('click', function(evt){
+  player.controlBar.playlistButton.on('click', function(evt) {
     player.playlistMenu.toggleClass('vjs-hidden');
-  })
+  });
 };
 
 // register components
 videojs.registerComponent('PlaylistMenu', PlaylistMenu);
 videojs.registerComponent('PlaylistMenuItem', PlaylistMenuItem);
+videojs.registerComponent('TogglePlaylistButton', TogglePlaylistButton);
 
 // register the plugin
 registerPlugin('playlistUi', playlistUi);
