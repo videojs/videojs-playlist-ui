@@ -206,7 +206,7 @@ class TogglePlaylistButton extends Component {
   createEl() {
     return super.createEl('div', {
       id: 'vjs-toggle-playlist',
-      innerHTML: '<button class="vjs-control vjs-button"><span class="vjs-icon-playlist-toggle" style="font-size:22px; padding:auto;" aria-hidden="true" value="Playlist Toggle"></span></button>'
+      innerHTML: '<button class="vjs-control vjs-button"><span class="vjs-icon-playlist-toggle" aria-hidden="true" value="Playlist Toggle"><svg enable-background="new 0 0 24 24" fill="#FFFFFF" height="24" id="Layer_1" version="1.1" viewBox="0 0 24 24" width="24" x="0px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" y="0px"><g id="XMLID_1_"><path d="M0,0h24v24H0V0z" fill="none"/><g id="XMLID_2_"><rect height="2" id="XMLID_3_" width="12" x="4" y="10"/><rect height="2" id="XMLID_4_" width="12" x="4" y="6"/><rect height="2" id="XMLID_5_" width="8" x="4" y="14"/><polygon id="XMLID_6_" points="14,14 14,20 19,17   "/></g></g></svg></span></button>'
     });
   }
 
@@ -231,7 +231,7 @@ class NextButton extends Component {
   createEl() {
     return super.createEl('div', {
       id: 'nextButton',
-      innerHTML: '<button class="vjs-control vjs-menu-button-popup vjs-button" role="button"><span class="vjs-icon-next" style="font-size:18px;" aria-hidden="true"></span><span class="vjs-control-text">Next Video</span></button><div id="vjs-playlist-up-next" name="vjs-playlist-up-next" class="vjs-menu"></div>'
+      innerHTML: '<button class="vjs-control vjs-menu-button-popup vjs-button" role="button"><span class="vjs-icon-next" aria-hidden="true"><svg width="35" height="25"><symbol id="sym01" viewBox="0 0 24 24" id="ic_fast_forward_24px"><path d="M4 18l8.5-6L4 6v12zm9-12v12l8.5-6L13 6z" fill="white"/></symbol><use href="#sym01" x="0" y="0" width="35" height="25"/></svg></span><span class="vjs-control-text">Next Video</span></button><div id="vjs-playlist-up-next" name="vjs-playlist-up-next" class="vjs-menu"></div>'
     });
   }
 /**

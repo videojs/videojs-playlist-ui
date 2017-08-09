@@ -6,6 +6,30 @@ $highlight-color: #141a21;
 $main-color: #fff;
 
 /* Rules common to mouse and touch devices */
+#nextButton {
+  position: relative;
+  margin: 0px;
+}
+#vjs-playlist-up-next-item {
+  position: absolute;
+  bottom: 7px;
+  left: .5em;
+  background-color: black;
+  overflow: hidden;
+}
+
+#vjs-playlist-up-next {
+  z-index: 1;
+}
+
+#vjs-playlist-up-next-item > span {
+  display: none;
+}
+
+#vjs-playlist-up-next-item > div > span::after {
+  content: ': ';
+}
+
 .vjs-playlist {
   list-style-type: none;
 
