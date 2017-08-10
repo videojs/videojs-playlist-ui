@@ -21,6 +21,10 @@ $main-color: #fff;
 #vjs-playlist-up-next {
   z-index: 1;
 }
+#vjs-playlist-up-next-item > img {
+  max-width: 120px;
+  max-height: 90px;
+}
 
 #vjs-playlist-up-next-item > span {
   display: none;
