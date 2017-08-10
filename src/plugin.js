@@ -406,6 +406,7 @@ class PlaylistMenu extends Component {
 const playlistUi = function(options) {
   const player = this;
   let settings;
+  let buttonIndex;
   let elem;
 
   if (!player.playlist) {
@@ -427,48 +428,56 @@ const playlistUi = function(options) {
   // build the playlist menu
   settings.el = elem;
   player.playlistMenu = new PlaylistMenu(player, settings);
+  if (!options.showPlaylist) {
+    player.playlistMenu.addClass('vjs-hidden');
+  }
 
   // build the toggle playlist button
-  let buttonIndex = player.controlBar.children().map(function(c) {
-    return c.name();
-  }).indexOf('FullscreenToggle') - 1;
+  if (options.showToggle) {
+    buttonIndex = player.controlBar.children().map(function(c) {
+      return c.name();
+    }).indexOf('FullscreenToggle') - 1;
 
-  player.controlBar.playlistToggleButton = player.controlBar.addChild('TogglePlaylistButton', {}, buttonIndex);
-  player.controlBar.playlistToggleButton.el().setAttribute('tabindex', 0);
-  player.controlBar.playlistToggleButton.on('click', function(evt) {
-    player.playlistMenu.toggleClass('vjs-hidden');
-  });
+    player.controlBar.playlistToggleButton = player.controlBar.addChild('TogglePlaylistButton', {}, buttonIndex);
+    player.controlBar.playlistToggleButton.el().setAttribute('tabindex', 0);
+    player.controlBar.playlistToggleButton.on('click', function(evt) {
+      player.playlistMenu.toggleClass('vjs-hidden');
+    });
+  }
 
   // build the up next playlist button
-  buttonIndex = player.controlBar.children().map(function(c) {
-    return c.name();
-  }).indexOf('PlayToggle') + 1;
-  player.controlBar.playlistNextButton = player.controlBar.addChild('NextButton', {}, buttonIndex);
-  player.controlBar.playlistNextButton.el().setAttribute('tabindex', 0);
-  const menuDiv = document.createElement('div');
+  if (options.showUpNext) {
+    buttonIndex = player.controlBar.children().map(function(c) {
+      return c.name();
+    }).indexOf('PlayToggle') + 1;
+    player.controlBar.playlistNextButton = player.controlBar.addChild('NextButton', {}, buttonIndex);
+    player.controlBar.playlistNextButton.el().setAttribute('tabindex', 0);
+    const menuDiv = document.createElement('div');
 
-  menuDiv.className = 'vjs-menu';
-  player.controlBar.playlistNextButton.addChild(menuDiv);
-  player.on('loadedmetadata', function() {
-    const next = player.playlistMenu.items[player.playlist.currentItem() + 1].thumbnail;
+    menuDiv.className = 'vjs-menu';
+    player.controlBar.playlistNextButton.addChild(menuDiv);
+    player.on('loadedmetadata', function() {
+      const next = player.playlistMenu.items[player.playlist.currentItem() + 1].thumbnail;
 
-    const nextnew = document.createElement('div');
+      const nextnew = document.createElement('div');
 
-    nextnew.className += 'vjs-menu-content';
-    nextnew.id = 'vjs-playlist-up-next-item';
-    nextnew.innerHTML = next.innerHTML;
-    const menu = player.controlBar.$('#vjs-playlist-up-next');
+      nextnew.className += 'vjs-menu-content';
+      nextnew.id = 'vjs-playlist-up-next-item';
+      nextnew.innerHTML = next.innerHTML;
+      const menu = player.controlBar.$('#vjs-playlist-up-next');
 
-    for (let i = 0; i < menu.children.length; i++) {
-      if (menu.children[i].className === 'vjs-menu-content') {
-        menu.removeChild(menu.children[i]);
+      for (let i = 0; i < menu.children.length; i++) {
+        if (menu.children[i].className === 'vjs-menu-content') {
+          menu.removeChild(menu.children[i]);
+        }
       }
-    }
-    menu.appendChild(nextnew);
-  });
-  player.controlBar.playlistNextButton.on('click', function(evt) {
-    player.playlist.next();
-  });
+      menu.appendChild(nextnew);
+    });
+    player.controlBar.playlistNextButton.on('click', function(evt) {
+      player.playlist.next();
+    });
+  }
+
 };
 
 // register components
