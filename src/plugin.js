@@ -413,6 +413,12 @@ const playlistUi = function(options) {
   let buttonIndex;
   let elem;
 
+  if (options === undefined) {
+    options = {};
+    options.showPlaylist = true;
+    options.showToggle = true;
+    options.showUpNext = true;
+  }
   if (options.showPlaylist === undefined) {
     options.showPlaylist = true;
   }
