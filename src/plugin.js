@@ -408,7 +408,15 @@ const playlistUi = function(options) {
   let settings;
   let buttonIndex;
   let elem;
-
+  if(options.showPlaylist === undefined){
+    options.showPlaylist = true;
+  }
+  if(options.showToggle === undefined){
+      options.showToggle = true;
+  }
+  if(options.showUpNext === undefined){
+        options.showUpNext = true;
+  }
   if (!player.playlist) {
     throw new Error('videojs-playlist is required for the playlist component');
   }
