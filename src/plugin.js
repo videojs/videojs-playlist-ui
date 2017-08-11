@@ -115,7 +115,9 @@ class PlaylistMenuItem extends Component {
 
     this.emitTapEvents();
 
-    this.on(['click', 'tap'], this.switchPlaylistItem_);
+    this.on([
+      'click', 'tap'
+    ], this.switchPlaylistItem_);
     this.on('keydown', this.handleKeyDown_);
 
   }
@@ -210,7 +212,7 @@ class TogglePlaylistButton extends Component {
     });
   }
 
-/**
+  /**
    * Handle click to toggle between open and closed
    *
    * @method handleClick
@@ -234,7 +236,7 @@ class NextButton extends Component {
       innerHTML: '<button class="vjs-control vjs-menu-button-popup vjs-button" role="button"><span class="vjs-icon-next" aria-hidden="true"><svg width="35" height="25"><symbol id="sym01" viewBox="0 0 24 24" id="ic_fast_forward_24px"><path d="M4 18l8.5-6L4 6v12zm9-12v12l8.5-6L13 6z" fill="white"/></symbol><use href="#sym01" x="0" y="0" width="35" height="25"/></svg></span><span class="vjs-control-text">Next Video</span></button><div id="vjs-playlist-up-next" name="vjs-playlist-up-next" class="vjs-menu"></div>'
     });
   }
-/**
+  /**
    * Handle click to toggle between open and closed
    *
    * @method handleClick
@@ -266,7 +268,9 @@ class PlaylistMenu extends Component {
       this.addClass('vjs-mouse');
     }
 
-    player.on(['loadstart', 'playlistchange'], (event) => {
+    player.on([
+      'loadstart', 'playlistchange'
+    ], (event) => {
       this.update();
     });
 
@@ -408,14 +412,15 @@ const playlistUi = function(options) {
   let settings;
   let buttonIndex;
   let elem;
-  if(options.showPlaylist === undefined){
+
+  if (options.showPlaylist === undefined) {
     options.showPlaylist = true;
   }
-  if(options.showToggle === undefined){
-      options.showToggle = true;
+  if (options.showToggle === undefined) {
+    options.showToggle = true;
   }
-  if(options.showUpNext === undefined){
-        options.showUpNext = true;
+  if (options.showUpNext === undefined) {
+    options.showUpNext = true;
   }
   if (!player.playlist) {
     throw new Error('videojs-playlist is required for the playlist component');
@@ -423,8 +428,8 @@ const playlistUi = function(options) {
 
   // if the first argument is a DOM element, use it to build the component
   if ((typeof window.HTMLElement !== 'undefined' && options instanceof window.HTMLElement) ||
-      // IE8 does not define HTMLElement so use a hackier type check
-      (options && options.nodeType === 1)) {
+  // IE8 does not define HTMLElement so use a hackier type check
+  (options && options.nodeType === 1)) {
     elem = options;
     settings = videojs.mergeOptions(defaults);
   } else {
