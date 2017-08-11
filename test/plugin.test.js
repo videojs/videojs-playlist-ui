@@ -144,7 +144,7 @@ QUnit.test('specializes the class name if touch input is absent', function(asser
 
   assert.ok(player.playlistMenu.hasClass('vjs-mouse'), 'marked the playlist menu');
 
-  videojs.browser.TOUCH_ENABLED = videojs.TOUCH_ENABLED = touchEnabled;
+  videojs.browser = videojs.mergeOptions({}, touchEnabled);
 });
 
 QUnit.module('Playlist Component', {setup, teardown});
