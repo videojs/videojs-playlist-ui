@@ -136,8 +136,8 @@ QUnit.test('can auto-setup elements with a custom class', function(assert) {
 
 QUnit.test('specializes the class name if touch input is absent', function(assert) {
   const touchEnabled = videojs.browser.TOUCH_ENABLED;
-
-  videojs.browser.TOUCH_ENABLED = videojs.TOUCH_ENABLED = false;
+  const touchEnabled2 = videojs.TOUCH_ENABLED = false
+  videojs.browser = videojs.mergeOptions({}, touchEnabled2);
 
   player.playlist(playlist);
   player.playlistUi();
