@@ -187,7 +187,11 @@
     }]);
 
     // Initialize the playlist-ui plugin with no option (i.e. the defaults).
-    player.playlistUi();
+    var options = {};
+    options.showPlaylist = false;
+    options.showToggle = false;
+    options.showUpNext = true;
+    player.playlistUi(options);
   </script>
 </body>
 </html>

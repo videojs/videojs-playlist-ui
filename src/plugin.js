@@ -115,7 +115,9 @@ class PlaylistMenuItem extends Component {
 
     this.emitTapEvents();
 
-    this.on(['click', 'tap'], this.switchPlaylistItem_);
+    this.on([
+      'click', 'tap'
+    ], this.switchPlaylistItem_);
     this.on('keydown', this.handleKeyDown_);
 
   }
@@ -194,6 +196,55 @@ class PlaylistMenuItem extends Component {
   }
 }
 
+class TogglePlaylistButton extends Component {
+
+  constructor(player, options) {
+    super(player, options);
+    this.el_.className = 'vjs-toggle-playlist';
+
+    // this.on(['tap','click'], this.handleClick);
+
+  }
+  createEl() {
+    return super.createEl('div', {
+      id: 'vjs-toggle-playlist',
+      innerHTML: '<button class="vjs-control vjs-button"><span class="vjs-icon-playlist-toggle" aria-hidden="true" value="Playlist Toggle"><svg enable-background="new 0 0 24 24" fill="#FFFFFF" height="24" id="Layer_1" version="1.1" viewBox="0 0 24 24" width="24" x="0px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" y="0px"><g id="XMLID_1_"><path d="M0,0h24v24H0V0z" fill="none"/><g id="XMLID_2_"><rect height="2" id="XMLID_3_" width="12" x="4" y="10"/><rect height="2" id="XMLID_4_" width="12" x="4" y="6"/><rect height="2" id="XMLID_5_" width="8" x="4" y="14"/><polygon id="XMLID_6_" points="14,14 14,20 19,17   "/></g></g></svg></span></button>'
+    });
+  }
+
+  /**
+   * Handle click to toggle between open and closed
+   *
+   * @method handleClick
+   */
+  handleClick(event) {}
+
+}
+
+class NextButton extends Component {
+
+  constructor(player, options) {
+    super(player, options);
+    this.el().className = 'vjs-next-video-button vjs-menu-button vjs-menu-button-popup vjs-button';
+
+    // this.on(['tap','click'], this.handleClick);
+
+  }
+  createEl() {
+    return super.createEl('div', {
+      id: 'nextButton',
+      innerHTML: '<button class="vjs-control vjs-menu-button-popup vjs-button" role="button"><span class="vjs-icon-next" aria-hidden="true"><svg width="35" height="25"><symbol id="sym01" viewBox="0 0 24 24" id="ic_fast_forward_24px"><path d="M4 18l8.5-6L4 6v12zm9-12v12l8.5-6L13 6z" fill="white"/></symbol><use href="#sym01" x="0" y="0" width="35" height="25"/></svg></span><span class="vjs-control-text">Next Video</span></button><div id="vjs-playlist-up-next" name="vjs-playlist-up-next" class="vjs-menu"></div>'
+    });
+  }
+  /**
+   * Handle click to toggle between open and closed
+   *
+   * @method handleClick
+   */
+  handleClick(event) {}
+
+}
+
 class PlaylistMenu extends Component {
 
   constructor(player, settings) {
@@ -217,7 +268,9 @@ class PlaylistMenu extends Component {
       this.addClass('vjs-mouse');
     }
 
-    player.on(['loadstart', 'playlistchange'], (event) => {
+    player.on([
+      'loadstart', 'playlistchange'
+    ], (event) => {
       this.update();
     });
 
@@ -349,16 +402,32 @@ class PlaylistMenu extends Component {
 const playlistUi = function(options) {
   const player = this;
   let settings;
+  let buttonIndex;
   let elem;
 
+  if (options === undefined) {
+    options = {};
+    options.showPlaylist = true;
+    options.showToggle = true;
+    options.showUpNext = true;
+  }
+  if (options.showPlaylist === undefined) {
+    options.showPlaylist = true;
+  }
+  if (options.showToggle === undefined) {
+    options.showToggle = true;
+  }
+  if (options.showUpNext === undefined) {
+    options.showUpNext = true;
+  }
   if (!player.playlist) {
     throw new Error('videojs-playlist is required for the playlist component');
   }
 
   // if the first argument is a DOM element, use it to build the component
   if ((typeof window.HTMLElement !== 'undefined' && options instanceof window.HTMLElement) ||
-      // IE8 does not define HTMLElement so use a hackier type check
-      (options && options.nodeType === 1)) {
+  // IE8 does not define HTMLElement so use a hackier type check
+  (options && options.nodeType === 1)) {
     elem = options;
     settings = videojs.mergeOptions(defaults);
   } else {
@@ -370,11 +439,63 @@ const playlistUi = function(options) {
   // build the playlist menu
   settings.el = elem;
   player.playlistMenu = new PlaylistMenu(player, settings);
+  if (!options.showPlaylist) {
+    player.playlistMenu.addClass('vjs-hidden');
+  }
+
+  // build the toggle playlist button
+  if (options.showToggle) {
+    buttonIndex = player.controlBar.children().map(function(c) {
+      return c.name();
+    }).indexOf('FullscreenToggle') - 1;
+
+    player.controlBar.playlistToggleButton = player.controlBar.addChild('TogglePlaylistButton', {}, buttonIndex);
+    player.controlBar.playlistToggleButton.el().setAttribute('tabindex', 0);
+    player.controlBar.playlistToggleButton.on('click', function(evt) {
+      player.playlistMenu.toggleClass('vjs-hidden');
+    });
+  }
+
+  // build the up next playlist button
+  if (options.showUpNext) {
+    buttonIndex = player.controlBar.children().map(function(c) {
+      return c.name();
+    }).indexOf('PlayToggle') + 1;
+    player.controlBar.playlistNextButton = player.controlBar.addChild('NextButton', {}, buttonIndex);
+    player.controlBar.playlistNextButton.el().setAttribute('tabindex', 0);
+    const menuDiv = document.createElement('div');
+
+    menuDiv.className = 'vjs-menu';
+    player.controlBar.playlistNextButton.addChild(menuDiv);
+    player.on('loadedmetadata', function() {
+      const next = player.playlistMenu.items[player.playlist.currentItem() + 1].thumbnail;
+
+      const nextnew = document.createElement('div');
+
+      nextnew.className += 'vjs-menu-content';
+      nextnew.id = 'vjs-playlist-up-next-item';
+      nextnew.innerHTML = next.innerHTML;
+      const menu = player.controlBar.$('#vjs-playlist-up-next');
+
+      for (let i = 0; i < menu.children.length; i++) {
+        if (menu.children[i].className === 'vjs-menu-content') {
+          menu.removeChild(menu.children[i]);
+        }
+      }
+      menu.appendChild(nextnew);
+    });
+    player.controlBar.playlistNextButton.on('click', function(evt) {
+      player.playlist.next();
+    });
+  }
+
 };
 
 // register components
 videojs.registerComponent('PlaylistMenu', PlaylistMenu);
 videojs.registerComponent('PlaylistMenuItem', PlaylistMenuItem);
+videojs.registerComponent('TogglePlaylistButton', TogglePlaylistButton);
+videojs.registerComponent('NextButton', NextButton);
 
 // register the plugin
 registerPlugin('playlistUi', playlistUi);
