@@ -27,6 +27,7 @@ const supportsCssPointerEvents = (() => {
 const defaults = {
   className: 'vjs-playlist',
   playOnSelect: false,
+  showPlaylist: true,
   supportsCssPointerEvents
 };
 
@@ -370,6 +371,9 @@ const playlistUi = function(options) {
   // build the playlist menu
   settings.el = elem;
   player.playlistMenu = new PlaylistMenu(player, settings);
+  if (!settings.showPlaylist) {
+    player.playlistMenu.addClass('vjs-hidden');
+  }
 };
 
 // register components
