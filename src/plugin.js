@@ -27,6 +27,7 @@ const supportsCssPointerEvents = (() => {
 const defaults = {
   className: 'vjs-playlist',
   playOnSelect: false,
+  showToggle: false,
   supportsCssPointerEvents
 };
 
@@ -341,7 +342,30 @@ class PlaylistMenu extends Component {
     }
   }
 }
+class TogglePlaylistButton extends Component {
 
+  constructor(player, options) {
+    super(player, options);
+    this.el_.className = 'vjs-toggle-playlist';
+
+    // this.on(['tap','click'], this.handleClick);
+
+  }
+  createEl() {
+    return super.createEl('div', {
+      id: 'vjs-toggle-playlist',
+      innerHTML: '<button class="vjs-control vjs-button"><span class="vjs-icon-playlist-toggle" aria-hidden="true" value="Playlist Toggle"><svg enable-background="new 0 0 24 24" fill="#FFFFFF" height="24" id="Layer_1" version="1.1" viewBox="0 0 24 24" width="24" x="0px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" y="0px"><g id="XMLID_1_"><path d="M0,0h24v24H0V0z" fill="none"/><g id="XMLID_2_"><rect height="2" id="XMLID_3_" width="12" x="4" y="10"/><rect height="2" id="XMLID_4_" width="12" x="4" y="6"/><rect height="2" id="XMLID_5_" width="8" x="4" y="14"/><polygon id="XMLID_6_" points="14,14 14,20 19,17   "/></g></g></svg></span></button>'
+    });
+  }
+
+  /**
+   * Handle click to toggle between open and closed
+   *
+   * @method handleClick
+   */
+  handleClick(event) {}
+
+}
 /**
  * Initialize the plugin.
  * @param options (optional) {object} configuration for the plugin
@@ -370,11 +394,25 @@ const playlistUi = function(options) {
   // build the playlist menu
   settings.el = elem;
   player.playlistMenu = new PlaylistMenu(player, settings);
+  // build the toggle playlist button
+  if (settings.showToggle) {
+    const buttonIndex = player.controlBar.children().map(function(c) {
+      return c.name();
+    }).indexOf('FullscreenToggle') - 1;
+
+    player.controlBar.playlistToggleButton = player.controlBar.addChild('TogglePlaylistButton', {}, buttonIndex);
+    player.controlBar.playlistToggleButton.el().setAttribute('tabindex', 0);
+    player.controlBar.playlistToggleButton.on('click', function(evt) {
+      player.playlistMenu.toggleClass('vjs-hidden');
+    });
+  }
+
 };
 
 // register components
 videojs.registerComponent('PlaylistMenu', PlaylistMenu);
 videojs.registerComponent('PlaylistMenuItem', PlaylistMenuItem);
+videojs.registerComponent('TogglePlaylistButton', TogglePlaylistButton);
 
 // register the plugin
 registerPlugin('playlistUi', playlistUi);
