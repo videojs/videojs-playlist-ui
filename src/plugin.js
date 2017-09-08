@@ -27,6 +27,7 @@ const supportsCssPointerEvents = (() => {
 const defaults = {
   className: 'vjs-playlist',
   playOnSelect: false,
+  showUpNext: false,
   supportsCssPointerEvents
 };
 
@@ -342,6 +343,31 @@ class PlaylistMenu extends Component {
   }
 }
 
+// up next button in controlbar
+class NextButton extends Component {
+
+  constructor(player, options) {
+    super(player, options);
+    this.el().className = 'vjs-next-video-button vjs-menu-button vjs-menu-button-popup vjs-button';
+
+    // this.on(['tap','click'], this.handleClick);
+
+  }
+  createEl() {
+    return super.createEl('div', {
+      id: 'nextButton',
+      innerHTML: '<button class="vjs-control vjs-menu-button-popup vjs-button" role="button"><span class="vjs-icon-next" aria-hidden="true"><svg width="35" height="25"><symbol id="sym01" viewBox="0 0 24 24" id="ic_fast_forward_24px"><path d="M4 18l8.5-6L4 6v12zm9-12v12l8.5-6L13 6z" fill="white"/></symbol><use href="#sym01" x="0" y="0" width="35" height="25"/></svg></span><span class="vjs-control-text">Next Video</span></button><div id="vjs-playlist-up-next" name="vjs-playlist-up-next" class="vjs-menu"></div>'
+    });
+  }
+  /**
+   * Handle click to toggle between open and closed
+   *
+   * @method handleClick
+   */
+  handleClick(event) {}
+
+}
+
 /**
  * Initialize the plugin.
  * @param options (optional) {object} configuration for the plugin
@@ -370,11 +396,45 @@ const playlistUi = function(options) {
   // build the playlist menu
   settings.el = elem;
   player.playlistMenu = new PlaylistMenu(player, settings);
+  // build the up next playlist button
+  if (settings.showUpNext) {
+    const buttonIndex = player.controlBar.children().map(function(c) {
+      return c.name();
+    }).indexOf('PlayToggle') + 1;
+
+    player.controlBar.playlistNextButton = player.controlBar.addChild('NextButton', {}, buttonIndex);
+    player.controlBar.playlistNextButton.el().setAttribute('tabindex', 0);
+    const menuDiv = document.createElement('div');
+
+    menuDiv.className = 'vjs-menu';
+    player.controlBar.playlistNextButton.addChild(menuDiv);
+    player.on('loadedmetadata', function() {
+      const next = player.playlistMenu.items[player.playlist.currentItem() + 1].thumbnail;
+
+      const nextnew = document.createElement('div');
+
+      nextnew.className += 'vjs-menu-content';
+      nextnew.id = 'vjs-playlist-up-next-item';
+      nextnew.innerHTML = next.innerHTML;
+      const menu = player.controlBar.$('#vjs-playlist-up-next');
+
+      for (let i = 0; i < menu.children.length; i++) {
+        if (menu.children[i].className === 'vjs-menu-content') {
+          menu.removeChild(menu.children[i]);
+        }
+      }
+      menu.appendChild(nextnew);
+    });
+    player.controlBar.playlistNextButton.on('click', function(evt) {
+      player.playlist.next();
+    });
+  }
 };
 
 // register components
 videojs.registerComponent('PlaylistMenu', PlaylistMenu);
 videojs.registerComponent('PlaylistMenuItem', PlaylistMenuItem);
+videojs.registerComponent('NextButton', NextButton);
 
 // register the plugin
 registerPlugin('playlistUi', playlistUi);
