@@ -37,8 +37,7 @@
     "watch": "npm-run-all -p watch:*",
     "watch:css": "npm-run-all build:css:sass watch:css:sass",
     "watch:css:sass": "node-sass src/plugin.scss dist/videojs-playlist-ui.css --output-style=compressed --linefeed=lf --watch src/**/*.scss",
-    "watch:js-modules": "rollup -c scripts/modules.rollup.config.js -w",
-    "watch:js-umd": "rollup -c scripts/umd.rollup.config.js -w",
+    "watch:js": "rollup -c scripts/build.rollup.config.js -w",
     "watch:test": "rollup -c scripts/test.rollup.config.js -w",
     "prepublish": "npm run build",
     "prepush": "npm run lint"

@@ -63,14 +63,14 @@ function setup() {
 
   elem.className = 'vjs-playlist';
   fixture.appendChild(elem);
-};
+}
 
 function teardown() {
   videojs.browser = oldVideojsBrowser;
   Html5.isSupported = realIsHtmlSupported;
   player.dispose();
   player = null;
-};
+}
 
 QUnit.module('Playlist Plugin', {
   setup,
