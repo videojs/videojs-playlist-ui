@@ -14,13 +14,14 @@
   "scripts": {
     "prebuild": "npm run clean",
     "build": "npm-run-all -p build:*",
-    "build:css": "npm-run-all build:css:sass build:css:bannerize",
-    "build:css:bannerize": "bannerize dist/videojs-playlist-ui.vertical.css --banner=scripts/banner.ejs",
-    "build:css:sass": "node-sass src/plugin.scss dist/videojs-playlist-ui.vertical.css --output-style=compressed --linefeed=lf",
-    "build:js": "npm-run-all build:js:rollup-modules build:js:rollup-umd build:js:bannerize build:js:uglify",
+    "build:css": "npm-run-all build:css:sass build:css:bannerize build:css:copy-vertical build:css:copy-no-prefix",
+    "build:css:copy-vertical": "cp dist/videojs-playlist-ui.css dist/videojs-playlist-ui.vertical.css",
+    "build:css:copy-no-prefix": "cp dist/videojs-playlist-ui.css dist/videojs-playlist-ui.vertical.no-prefix.css",
+    "build:css:bannerize": "bannerize dist/videojs-playlist-ui.css --banner=scripts/banner.ejs",
+    "build:css:sass": "node-sass src/plugin.scss dist/videojs-playlist-ui.css --output-style=compressed --linefeed=lf",
+    "build:js": "npm-run-all build:js:rollup build:js:bannerize build:js:uglify",
     "build:js:bannerize": "bannerize dist/videojs-playlist-ui.js --banner=scripts/banner.ejs",
-    "build:js:rollup-modules": "rollup -c scripts/modules.rollup.config.js",
-    "build:js:rollup-umd": "rollup -c scripts/umd.rollup.config.js",
+    "build:js:rollup": "rollup -c scripts/build.rollup.config.js",
     "build:js:uglify": "uglifyjs dist/videojs-playlist-ui.js --comments --mangle --compress --ie8 -o dist/videojs-playlist-ui.min.js",
     "build:test": "rollup -c scripts/test.rollup.config.js",
     "clean": "rimraf dist test/dist",
@@ -34,9 +35,9 @@
     "preversion": "npm test",
     "version": "node scripts/version.js",
     "watch": "npm-run-all -p watch:*",
-    "watch:css": "node-sass src/plugin.scss dist/videojs-playlist-ui.vertical.css --output-style=compressed --linefeed=lf --watch src/**/*.scss",
-    "watch:js-modules": "rollup -c scripts/modules.rollup.config.js -w",
-    "watch:js-umd": "rollup -c scripts/umd.rollup.config.js -w",
+    "watch:css": "npm-run-all build:css:sass watch:css:sass",
+    "watch:css:sass": "node-sass src/plugin.scss dist/videojs-playlist-ui.css --output-style=compressed --linefeed=lf --watch src/**/*.scss",
+    "watch:js": "rollup -c scripts/build.rollup.config.js -w",
     "watch:test": "rollup -c scripts/test.rollup.config.js -w",
     "prepublish": "npm run build",
     "prepush": "npm run lint"
@@ -68,17 +69,18 @@
     "karma-safari-launcher": "^1.0.0",
     "load-grunt-tasks": "^3.1.0",
     "mkdirp": "^0.5.1",
-    "node-sass": "^4.5.3",
+    "node-sass": "4.5.3",
     "node-static": "^0.7.9",
     "npm-run-all": "^4.0.2",
     "qunitjs": "^1.21.0",
     "rimraf": "^2.6.1",
-    "rollup": "^0.41.6",
+    "rollup": "^0.50.0",
     "rollup-plugin-babel": "^2.7.1",
     "rollup-plugin-commonjs": "^8.0.2",
     "rollup-plugin-json": "^2.1.1",
     "rollup-plugin-multi-entry": "^2.0.1",
     "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-replace": "^2.0.0",
     "rollup-watch": "^3.2.2",
     "semver": "^5.3.0",
     "sinon": "^2.2.0",
@@ -87,7 +89,7 @@
     "videojs-standard": "^6.0.0"
   },
   "generator-videojs-plugin": {
-    "version": "5.0.0"
+    "version": "5.0.3"
   },
   "vjsstandard": {
     "ignore": [

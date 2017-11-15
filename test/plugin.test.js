@@ -6,6 +6,7 @@ import '../src/plugin';
 
 let realIsHtmlSupported;
 let player;
+let oldVideojsBrowser;
 
 const playlist = [{
   name: 'Movie 1',
@@ -36,7 +37,10 @@ QUnit.test('the environment is sane', function(assert) {
   assert.ok(true, 'everything is swell');
 });
 
-const setup = function() {
+function setup() {
+  oldVideojsBrowser = videojs.browser;
+  videojs.browser = videojs.mergeOptions({}, videojs.browser);
+
   const fixture = document.querySelector('#qunit-fixture');
 
   // force HTML support so the tests run in a reasonable
@@ -59,13 +63,14 @@ const setup = function() {
 
   elem.className = 'vjs-playlist';
   fixture.appendChild(elem);
-};
+}
 
-const teardown = function() {
+function teardown() {
+  videojs.browser = oldVideojsBrowser;
   Html5.isSupported = realIsHtmlSupported;
   player.dispose();
   player = null;
-};
+}
 
 QUnit.module('Playlist Plugin', {
   setup,
