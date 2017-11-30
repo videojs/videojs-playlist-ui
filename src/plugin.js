@@ -203,6 +203,10 @@ class PlaylistMenu extends Component {
     super(player, options);
     this.items = [];
 
+    if (options.horizontal) {
+      this.addClass('vjs-playlist-horizontal');
+    }
+
     // If CSS pointer events aren't supported, we have to prevent
     // clicking on playlist items during ads with slightly more
     // invasive techniques. Details in the stylesheet.
