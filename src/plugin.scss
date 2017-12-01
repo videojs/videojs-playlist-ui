@@ -16,7 +16,6 @@ $placeholder-background-color: #303030;
   background-color: $background-color;
   color: $main-color;
   list-style-type: none;
-  overflow: auto;
 
   img {
     display: block;
@@ -133,6 +132,7 @@ $placeholder-background-color: #303030;
 
 // Vertical/default playlist orientation
 .vjs-playlist-vertical {
+  overflow-y: auto;
 
   img {
     width: 100%;
@@ -155,6 +155,7 @@ $placeholder-background-color: #303030;
 
 // Horizontal playlist orientation
 .vjs-playlist-horizontal {
+  overflow-x: auto;
 
   img {
     min-width: 100px;
