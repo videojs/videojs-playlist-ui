@@ -162,7 +162,6 @@ class PlaylistMenuItem extends Component {
 
     nowPlayingEl.className = 'vjs-playlist-now-playing-text';
     nowPlayingEl.appendChild(document.createTextNode(nowPlayingText));
-    nowPlayingEl.setAttribute('title', nowPlayingText);
     this.thumbnail.appendChild(nowPlayingEl);
 
     // Title container contains title and "up next"
@@ -177,7 +176,6 @@ class PlaylistMenuItem extends Component {
 
     upNextEl.className = 'vjs-up-next-text';
     upNextEl.appendChild(document.createTextNode(upNextText));
-    upNextEl.setAttribute('title', upNextText);
     titleContainerEl.appendChild(upNextEl);
 
     // Video title
@@ -186,7 +184,6 @@ class PlaylistMenuItem extends Component {
 
     titleEl.className = 'vjs-playlist-name';
     titleEl.appendChild(document.createTextNode(titleText));
-    titleEl.setAttribute('title', titleText);
     titleContainerEl.appendChild(titleEl);
 
     return li;
@@ -205,6 +202,8 @@ class PlaylistMenu extends Component {
 
     if (options.horizontal) {
       this.addClass('vjs-playlist-horizontal');
+    } else {
+      this.addClass('vjs-playlist-vertical');
     }
 
     // If CSS pointer events aren't supported, we have to prevent
