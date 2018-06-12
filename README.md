@@ -15,11 +15,11 @@ Maintenance Status: Stable
 
 
 - [Getting Started](#getting-started)
-- [Documentation](#documentation)
-  - [Default Implementation](#default-implementation)
-  - [Using a Custom Class](#using-a-custom-class)
-  - [Using a Custom Element](#using-a-custom-element)
-  - [Other Options](#other-options)
+- [Root Element](#root-element)
+  - [Using Automatic Discovery (default, example)](#using-automatic-discovery-default-example)
+  - [Using a Custom Class (example)](#using-a-custom-class-example)
+  - [Using a Custom Element (example)](#using-a-custom-element-example)
+- [Other Options](#other-options)
     - [`className`](#classname)
     - [playOnSelect](#playonselect)
 - [Playlists and Advertisements](#playlists-and-advertisements)
