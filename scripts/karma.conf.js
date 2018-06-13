@@ -40,6 +40,7 @@ module.exports = function(config) {
       'dist/videojs-playlist-ui.css',
       'node_modules/sinon/pkg/sinon.js',
       'node_modules/video.js/dist/video.js',
+      'node_modules/videojs-playlist/dist/videojs-playlist.js',
       'test/dist/bundle.js'
     ],
     customLaunchers: {
