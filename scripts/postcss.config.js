@@ -25,6 +25,8 @@ module.exports = function(context) {
       // inlines local file imports
       require('postcss-import')(),
 
+      require('postcss-simple-vars')(),
+
       // allows you to use newer css features, by converting
       // them into something browsers can support now.
       // see https://preset-env.cssdb.org/features
