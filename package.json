@@ -12,7 +12,8 @@
   "scripts": {
     "prebuild": "npm run clean",
     "build": "npm-run-all -p build:*",
-    "build:css": "npm-run-all build:css:main build:css:copy-vertical build:css:copy-no-prefix",
+    "build:css": "node-sass src/plugin.scss dist/videojs-ssai.css --output-style=compressed --linefeed=lf",
+    "build:css:postcss": "npm-run-all build:css:main build:css:copy-vertical build:css:copy-no-prefix",
     "build:css:main": "postcss --verbose -o dist/videojs-playlist-ui.css --config scripts/postcss.config.js src/plugin.css",
     "build:css:copy-no-prefix": "cp dist/videojs-playlist-ui.css dist/videojs-playlist-ui.vertical.no-prefix.css",
     "build:css:copy-vertical": "cp dist/videojs-playlist-ui.css dist/videojs-playlist-ui.vertical.css",
@@ -65,6 +66,7 @@
     "karma-qunit": "^2.0.0",
     "karma-safari-launcher": "^1.0.0",
     "mkdirp": "^0.5.1",
+    "node-sass": "^4.5.3",
     "npm-run-all": "^4.1.2",
     "postcss-banner": "^3.0.0",
     "postcss-cli": "^5.0.0",
