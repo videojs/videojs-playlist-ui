@@ -183,7 +183,7 @@ class PlaylistMenuItem extends Component {
 
     // Video title
     const titleEl = document.createElement('cite');
-    const titleText = item.name || item.name === "" ? item.name : this.localize('Untitled Video');
+    const titleText = item.name || item.name === '' ? item.name : this.localize('Untitled Video');
 
     titleEl.className = 'vjs-playlist-name';
     titleEl.appendChild(document.createTextNode(titleText));
