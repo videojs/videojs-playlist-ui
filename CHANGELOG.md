@@ -1,3 +1,10 @@
+<a name="3.0.7"></a>
+## [3.0.7](https://github.com/brightcove/videojs-playlist-ui/compare/v3.0.6...v3.0.7) (2018-07-20)
+
+### Bug Fixes
+
+* update rollup to fix test build ([d329710](https://github.com/brightcove/videojs-playlist-ui/commit/d329710))
+
 <a name="3.0.6"></a>
 ## [3.0.6](https://github.com/brightcove/videojs-playlist-ui/compare/v3.0.5...v3.0.6) (2017-09-05)
 
