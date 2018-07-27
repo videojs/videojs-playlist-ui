@@ -93,7 +93,7 @@
   "main": "dist/videojs-playlist-ui.cjs.js",
   "module": "dist/videojs-playlist-ui.es.js",
   "generator-videojs-plugin": {
-    "version": "6.1.2"
+    "version": "6.1.4"
   },
   "vjsstandard": {
     "ignore": [

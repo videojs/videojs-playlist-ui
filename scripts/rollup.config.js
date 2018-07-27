@@ -71,7 +71,9 @@ const externals = {
 
   ]),
   module: Object.keys(globals.module).concat([
-
+    'global',
+    'global/document',
+    'global/window'
   ]),
   test: Object.keys(globals.test).concat([
 
