@@ -141,9 +141,10 @@ class PlaylistMenuItem extends Component {
     if (item.data) {
       const dataEntries = Object.entries(item.data);
 
-      if(dataEntries.length > 0) {
-	dataEntries.forEach(entry => {
-	  const [key, value] = entry;
+      if (dataEntries.length > 0) {
+        dataEntries.forEach(entry => {
+          const [key, value] = entry;
+
           li.setAttribute(`data-${key}`, value);
         });
       }
