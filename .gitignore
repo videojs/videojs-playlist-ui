@@ -26,6 +26,6 @@ bower_components/
 node_modules/
 
 # Build-related directories
-dist/
+#dist/
 docs/api/
 test/dist/
