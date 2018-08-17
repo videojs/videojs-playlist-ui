@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import document from 'global/document';
 import window from 'global/window';
 import QUnit from 'qunit';
@@ -10,6 +11,10 @@ const playlist = [{
   name: 'Movie 1',
   description: 'Movie 1 description',
   duration: 100,
+  data: {
+    id: '1',
+    foo: 'bar'
+  },
   sources: [{
     src: '//example.com/movie1.mp4',
     type: 'video/mp4'
@@ -204,6 +209,20 @@ QUnit.test('includes the video name if provided', function(assert) {
   assert.strictEqual(items[1].querySelector('.vjs-playlist-name').textContent,
         'Untitled Video',
         'wrote a placeholder for the name');
+});
+
+QUnit.test('includes custom data attribute if provided', function(assert) {
+  this.player.playlist(playlist);
+  this.player.playlistUi();
+
+  const items = this.fixture.querySelectorAll('.vjs-playlist-item');
+
+  assert.strictEqual(items[0].dataset.id,
+        playlist[0].data.id,
+        'set a single data attribute');
+  assert.strictEqual(items[0].dataset.foo,
+        playlist[0].data.foo,
+        'set an addtional data attribute');
 });
 
 QUnit.test('outputs a <picture> for simple thumbnails', function(assert) {
