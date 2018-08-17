@@ -144,8 +144,7 @@ class PlaylistMenuItem extends Component {
       if (dataEntries.length > 0) {
         dataEntries.forEach(entry => {
           const [key, value] = entry;
-
-          li.setAttribute(`data-${key}`, value);
+          li.dataset[key] = value;
         });
       }
     }
