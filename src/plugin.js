@@ -138,7 +138,7 @@ class PlaylistMenuItem extends Component {
     const li = document.createElement('li');
     const item = this.options_.item;
 
-    if (item.data) {
+    if (typeof item.data === 'object' && item.data) {
       const dataEntries = Object.entries(item.data);
 
       if (dataEntries.length > 0) {
