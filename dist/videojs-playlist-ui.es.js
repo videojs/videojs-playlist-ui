@@ -4,6 +4,12 @@ import videojs from 'video.js';
 
 var version = "3.4.2";
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+  return typeof obj;
+} : function (obj) {
+  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+};
+
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
@@ -175,16 +181,13 @@ var PlaylistMenuItem = function (_Component) {
     var li = document.createElement('li');
     var item = this.options_.item;
 
-    if (item.data) {
-      var dataEntries = Object.entries(item.data);
+    if (_typeof(item.data) === 'object' && item.data) {
+      var dataKeys = Object.keys(item.data);
 
-      if (dataEntries.length > 0) {
-        dataEntries.forEach(function (entry) {
-          var key = entry[0],
-              value = entry[1];
-
-
-          li.setAttribute('data-' + key, value);
+      if (dataKeys.length > 0) {
+        dataKeys.forEach(function (key) {
+          var value = item.data[key];
+          li.dataset[key] = value;
         });
       }
     }
