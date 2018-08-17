@@ -138,14 +138,14 @@ class PlaylistMenuItem extends Component {
     const li = document.createElement('li');
     const item = this.options_.item;
 
-    if (item.data) {
-      const dataEntries = Object.entries(item.data);
+    if (typeof item.data === 'object' && item.data) {
+      const dataKeys = Object.keys(item.data);
 
-      if (dataEntries.length > 0) {
-        dataEntries.forEach(entry => {
-          const [key, value] = entry;
+      if (dataKeys.length > 0) {
+        dataKeys.forEach(key => {
+          const value = item.data[key];
 
-          li.setAttribute(`data-${key}`, value);
+          li.dataset[key] = value;
         });
       }
     }
