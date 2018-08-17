@@ -193,6 +193,7 @@
         if (dataKeys.length > 0) {
           dataKeys.forEach(function (key) {
             var value = item.data[key];
+
             li.dataset[key] = value;
           });
         }

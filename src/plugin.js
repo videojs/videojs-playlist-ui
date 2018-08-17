@@ -144,6 +144,7 @@ class PlaylistMenuItem extends Component {
       if (dataKeys.length > 0) {
         dataKeys.forEach(key => {
           const value = item.data[key];
+
           li.dataset[key] = value;
         });
       }
