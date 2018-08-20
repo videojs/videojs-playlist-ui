@@ -138,16 +138,14 @@ class PlaylistMenuItem extends Component {
     const li = document.createElement('li');
     const item = this.options_.item;
 
-    if (typeof item.data === 'object' && item.data) {
+    if (typeof item.data === 'object') {
       const dataKeys = Object.keys(item.data);
 
-      if (dataKeys.length > 0) {
-        dataKeys.forEach(key => {
-          const value = item.data[key];
+      dataKeys.forEach(key => {
+        const value = item.data[key];
 
-          li.dataset[key] = value;
-        });
-      }
+        li.dataset[key] = value;
+      });
     }
 
     li.className = 'vjs-playlist-item';
