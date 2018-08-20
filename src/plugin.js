@@ -138,6 +138,16 @@ class PlaylistMenuItem extends Component {
     const li = document.createElement('li');
     const item = this.options_.item;
 
+    if (typeof item.data === 'object') {
+      const dataKeys = Object.keys(item.data);
+
+      dataKeys.forEach(key => {
+        const value = item.data[key];
+
+        li.dataset[key] = value;
+      });
+    }
+
     li.className = 'vjs-playlist-item';
     li.setAttribute('tabIndex', 0);
 
