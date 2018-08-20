@@ -1,3 +1,10 @@
+<a name="3.5.0"></a>
+# [3.5.0](https://github.com/brightcove/videojs-playlist-ui/compare/v3.4.2...v3.5.0) (2018-08-20)
+
+### Features
+
+* set dataset attributes on playlist items when they have a data object ([#68](https://github.com/brightcove/videojs-playlist-ui/issues/68)) ([e16f2dd](https://github.com/brightcove/videojs-playlist-ui/commit/e16f2dd))
+
 <a name="3.4.2"></a>
 ## [3.4.2](https://github.com/brightcove/videojs-playlist-ui/compare/v3.4.1...v3.4.2) (2018-08-03)
 
