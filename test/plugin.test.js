@@ -220,8 +220,14 @@ QUnit.test('includes custom data attribute if provided', function(assert) {
   assert.strictEqual(items[0].dataset.id,
         playlist[0].data.id,
         'set a single data attribute');
+  assert.strictEqual(items[0].dataset.id,
+        '1',
+        'set a single data attribute (actual value)');
   assert.strictEqual(items[0].dataset.foo,
         playlist[0].data.foo,
+        'set an addtional data attribute');
+  assert.strictEqual(items[0].dataset.foo,
+        'bar',
         'set an addtional data attribute');
 });
 
