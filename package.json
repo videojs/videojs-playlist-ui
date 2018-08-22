@@ -88,7 +88,7 @@
     "sinon": "^5.1.0",
     "uglify-es": "^3.3.9",
     "videojs-playlist": "^4.2.3",
-    "videojs-standard": "^6.0.3"
+    "videojs-standard": "^7.0.0"
   },
   "main": "dist/videojs-playlist-ui.cjs.js",
   "module": "dist/videojs-playlist-ui.es.js",
