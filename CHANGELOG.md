@@ -1,3 +1,10 @@
+<a name="3.5.1"></a>
+## [3.5.1](https://github.com/brightcove/videojs-playlist-ui/compare/v3.5.0...v3.5.1) (2018-08-23)
+
+### Chores
+
+* generator v7 ([#72](https://github.com/brightcove/videojs-playlist-ui/issues/72)) ([c8cb58d](https://github.com/brightcove/videojs-playlist-ui/commit/c8cb58d))
+
 <a name="3.5.0"></a>
 # [3.5.0](https://github.com/brightcove/videojs-playlist-ui/compare/v3.4.2...v3.5.0) (2018-08-20)
 
