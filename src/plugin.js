@@ -232,18 +232,26 @@ class PlaylistMenu extends Component {
       this.addClass('vjs-mouse');
     }
 
-    player.on(['loadstart', 'playlistchange', 'playlistsorted'], (event) => {
+    this.on(player, ['loadstart', 'playlistchange', 'playlistsorted'], (event) => {
       this.update();
     });
 
     // Keep track of whether an ad is playing so that the menu
     // appearance can be adapted appropriately
-    player.on('adstart', () => {
+    this.on(player, 'adstart', () => {
       this.addClass('vjs-ad-playing');
     });
 
-    player.on('adend', () => {
+    this.on(player, 'adend', () => {
       this.removeClass('vjs-ad-playing');
+    });
+
+    this.on('dispose', () => {
+      player.playlistMenu = null;
+    });
+
+    this.on(player, 'dispose', () => {
+      this.dispose();
     });
   }
 

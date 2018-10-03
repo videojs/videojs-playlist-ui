@@ -533,3 +533,25 @@ QUnit.test('play should not get called by default upon selection of menu items '
   this.player.trigger('loadstart');
   assert.strictEqual(playCalled, false, 'play should not get called by default');
 });
+
+QUnit.test('disposing the playlist menu nulls out the player\'s reference to it', function(assert) {
+  assert.strictEqual(this.fixture.querySelectorAll('.vjs-playlist').length, 2, 'there are two playlist containers at the start');
+
+  this.player.playlist(playlist);
+  this.player.playlistUi();
+  this.player.playlistMenu.dispose();
+
+  assert.strictEqual(this.fixture.querySelectorAll('.vjs-playlist').length, 1, 'only the unused playlist container is left');
+  assert.strictEqual(this.player.playlistMenu, null, 'the playlistMenu property is null');
+});
+
+QUnit.test('disposing the player also disposes the playlist menu', function(assert) {
+  assert.strictEqual(this.fixture.querySelectorAll('.vjs-playlist').length, 2, 'there are two playlist containers at the start');
+
+  this.player.playlist(playlist);
+  this.player.playlistUi();
+  this.player.dispose();
+
+  assert.strictEqual(this.fixture.querySelectorAll('.vjs-playlist').length, 1, 'only the unused playlist container is left');
+  assert.strictEqual(this.player.playlistMenu, null, 'the playlistMenu property is null');
+});
