@@ -545,6 +545,25 @@ QUnit.test('disposing the playlist menu nulls out the player\'s reference to it'
   assert.strictEqual(this.player.playlistMenu, null, 'the playlistMenu property is null');
 });
 
+QUnit.test('disposing the playlist menu removes playlist menu items', function(assert) {
+  assert.strictEqual(this.fixture.querySelectorAll('.vjs-playlist').length, 2, 'there are two playlist containers at the start');
+
+  this.player.playlist(playlist);
+  this.player.playlistUi();
+
+  // Cache some references so we can refer to them after disposal.
+  const items = [].concat(this.player.playlistMenu.items);
+
+  this.player.playlistMenu.dispose();
+
+  assert.strictEqual(this.fixture.querySelectorAll('.vjs-playlist').length, 1, 'only the unused playlist container is left');
+  assert.strictEqual(this.player.playlistMenu, null, 'the playlistMenu property is null');
+
+  items.forEach(i => {
+    assert.strictEqual(i.el_, null, `the item "${i.id_}" has been disposed`);
+  });
+});
+
 QUnit.test('disposing the player also disposes the playlist menu', function(assert) {
   assert.strictEqual(this.fixture.querySelectorAll('.vjs-playlist').length, 2, 'there are two playlist containers at the start');
 

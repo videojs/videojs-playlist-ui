@@ -247,6 +247,7 @@ class PlaylistMenu extends Component {
     });
 
     this.on('dispose', () => {
+      this.empty_();
       player.playlistMenu = null;
     });
 
@@ -257,6 +258,13 @@ class PlaylistMenu extends Component {
 
   createEl() {
     return dom.createEl('div', {className: this.options_.className});
+  }
+
+  empty_() {
+    if (this.items && this.items.length) {
+      this.items.forEach(i => i.dispose());
+      this.items.length = 0;
+    }
   }
 
   createPlaylist_() {
@@ -270,11 +278,7 @@ class PlaylistMenu extends Component {
       this.el_.appendChild(list);
     }
 
-    // remove any existing items
-    for (let i = 0; i < this.items.length; i++) {
-      list.removeChild(this.items[i].el_);
-    }
-    this.items.length = 0;
+    this.empty_();
 
     // create new items
     for (let i = 0; i < playlist.length; i++) {
