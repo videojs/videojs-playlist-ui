@@ -232,23 +232,39 @@ class PlaylistMenu extends Component {
       this.addClass('vjs-mouse');
     }
 
-    player.on(['loadstart', 'playlistchange', 'playlistsorted'], (event) => {
+    this.on(player, ['loadstart', 'playlistchange', 'playlistsorted'], (event) => {
       this.update();
     });
 
     // Keep track of whether an ad is playing so that the menu
     // appearance can be adapted appropriately
-    player.on('adstart', () => {
+    this.on(player, 'adstart', () => {
       this.addClass('vjs-ad-playing');
     });
 
-    player.on('adend', () => {
+    this.on(player, 'adend', () => {
       this.removeClass('vjs-ad-playing');
+    });
+
+    this.on('dispose', () => {
+      this.empty_();
+      player.playlistMenu = null;
+    });
+
+    this.on(player, 'dispose', () => {
+      this.dispose();
     });
   }
 
   createEl() {
     return dom.createEl('div', {className: this.options_.className});
+  }
+
+  empty_() {
+    if (this.items && this.items.length) {
+      this.items.forEach(i => i.dispose());
+      this.items.length = 0;
+    }
   }
 
   createPlaylist_() {
@@ -262,11 +278,7 @@ class PlaylistMenu extends Component {
       this.el_.appendChild(list);
     }
 
-    // remove any existing items
-    for (let i = 0; i < this.items.length; i++) {
-      list.removeChild(this.items[i].el_);
-    }
-    this.items.length = 0;
+    this.empty_();
 
     // create new items
     for (let i = 0; i < playlist.length; i++) {
