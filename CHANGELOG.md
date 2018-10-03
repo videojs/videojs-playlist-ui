@@ -1,3 +1,16 @@
+<a name="3.5.2"></a>
+## [3.5.2](https://github.com/brightcove/videojs-playlist-ui/compare/v3.5.1...v3.5.2) (2018-10-03)
+
+### Bug Fixes
+
+* Remove the playlist UI when the player is disposed. ([#81](https://github.com/brightcove/videojs-playlist-ui/issues/81)) ([c519585](https://github.com/brightcove/videojs-playlist-ui/commit/c519585))
+* Remove the postinstall script to prevent install issues ([#76](https://github.com/brightcove/videojs-playlist-ui/issues/76)) ([fbe09e2](https://github.com/brightcove/videojs-playlist-ui/commit/fbe09e2))
+
+### Chores
+
+* update to generator-videojs-plugin[@7](https://github.com/7).2.0 ([0235fee](https://github.com/brightcove/videojs-playlist-ui/commit/0235fee))
+* **package:** update rollup to version 0.66.0 ([#79](https://github.com/brightcove/videojs-playlist-ui/issues/79)) ([dc86980](https://github.com/brightcove/videojs-playlist-ui/commit/dc86980))
+
 <a name="3.5.1"></a>
 ## [3.5.1](https://github.com/brightcove/videojs-playlist-ui/compare/v3.5.0...v3.5.1) (2018-08-23)
 
