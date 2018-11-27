@@ -203,12 +203,16 @@ QUnit.test('includes the video name if provided', function(assert) {
 
   const items = this.fixture.querySelectorAll('.vjs-playlist-item');
 
-  assert.strictEqual(items[0].querySelector('.vjs-playlist-name').textContent,
+  assert.strictEqual(
+    items[0].querySelector('.vjs-playlist-name').textContent,
     playlist[0].name,
-    'wrote the name');
-  assert.strictEqual(items[1].querySelector('.vjs-playlist-name').textContent,
+    'wrote the name'
+  );
+  assert.strictEqual(
+    items[1].querySelector('.vjs-playlist-name').textContent,
     'Untitled Video',
-    'wrote a placeholder for the name');
+    'wrote a placeholder for the name'
+  );
 });
 
 QUnit.test('includes custom data attribute if provided', function(assert) {
@@ -217,18 +221,26 @@ QUnit.test('includes custom data attribute if provided', function(assert) {
 
   const items = this.fixture.querySelectorAll('.vjs-playlist-item');
 
-  assert.strictEqual(items[0].dataset.id,
+  assert.strictEqual(
+    items[0].dataset.id,
     playlist[0].data.id,
-    'set a single data attribute');
-  assert.strictEqual(items[0].dataset.id,
+    'set a single data attribute'
+  );
+  assert.strictEqual(
+    items[0].dataset.id,
     '1',
-    'set a single data attribute (actual value)');
-  assert.strictEqual(items[0].dataset.foo,
+    'set a single data attribute (actual value)'
+  );
+  assert.strictEqual(
+    items[0].dataset.foo,
     playlist[0].data.foo,
-    'set an addtional data attribute');
-  assert.strictEqual(items[0].dataset.foo,
+    'set an addtional data attribute'
+  );
+  assert.strictEqual(
+    items[0].dataset.foo,
     'bar',
-    'set an addtional data attribute');
+    'set an addtional data attribute'
+  );
 });
 
 QUnit.test('outputs a <picture> for simple thumbnails', function(assert) {
@@ -266,19 +278,27 @@ QUnit.test('outputs a <picture> for responsive thumbnails', function(assert) {
   const imgs = this.fixture.querySelectorAll('.vjs-playlist-item picture img');
 
   assert.strictEqual(sources.length, 1, 'output one source');
-  assert.strictEqual(sources[0].srcset,
+  assert.strictEqual(
+    sources[0].srcset,
     playlistOverride[0].thumbnail[0].srcset,
-    'wrote the srcset attribute');
-  assert.strictEqual(sources[0].type,
+    'wrote the srcset attribute'
+  );
+  assert.strictEqual(
+    sources[0].type,
     playlistOverride[0].thumbnail[0].type,
-    'wrote the type attribute');
-  assert.strictEqual(sources[0].media,
+    'wrote the type attribute'
+  );
+  assert.strictEqual(
+    sources[0].media,
     playlistOverride[0].thumbnail[0].media,
-    'wrote the type attribute');
+    'wrote the type attribute'
+  );
   assert.strictEqual(imgs.length, 1, 'output one img');
-  assert.strictEqual(imgs[0].src,
+  assert.strictEqual(
+    imgs[0].src,
     resolveUrl(playlistOverride[0].thumbnail[1].src),
-    'output the img src attribute');
+    'output the img src attribute'
+  );
 });
 
 QUnit.test('outputs a placeholder for items without thumbnails', function(assert) {
@@ -298,12 +318,16 @@ QUnit.test('includes the duration if one is provided', function(assert) {
   const durations = this.fixture.querySelectorAll('.vjs-playlist-item .vjs-playlist-duration');
 
   assert.strictEqual(durations.length, 1, 'skipped the item without a duration');
-  assert.strictEqual(durations[0].textContent,
+  assert.strictEqual(
+    durations[0].textContent,
     '1:40',
-    'wrote the duration');
-  assert.strictEqual(durations[0].getAttribute('datetime'),
+    'wrote the duration'
+  );
+  assert.strictEqual(
+    durations[0].getAttribute('datetime'),
     'PT0H0M' + playlist[0].duration + 'S',
-    'wrote a machine-readable datetime');
+    'wrote a machine-readable datetime'
+  );
 });
 
 QUnit.test('marks the selected playlist item on startup', function(assert) {
@@ -314,9 +338,11 @@ QUnit.test('marks the selected playlist item on startup', function(assert) {
   const selectedItems = this.fixture.querySelectorAll('.vjs-playlist-item.vjs-selected');
 
   assert.strictEqual(selectedItems.length, 1, 'marked one playlist item');
-  assert.strictEqual(selectedItems[0].querySelector('.vjs-playlist-name').textContent,
+  assert.strictEqual(
+    selectedItems[0].querySelector('.vjs-playlist-name').textContent,
     playlist[0].name,
-    'marked the first playlist item');
+    'marked the first playlist item'
+  );
 });
 
 QUnit.test('updates the selected playlist item on loadstart', function(assert) {
@@ -329,13 +355,17 @@ QUnit.test('updates the selected playlist item on loadstart', function(assert) {
 
   const selectedItems = this.fixture.querySelectorAll('.vjs-playlist-item.vjs-selected');
 
-  assert.strictEqual(this.fixture.querySelectorAll('.vjs-playlist-item').length,
+  assert.strictEqual(
+    this.fixture.querySelectorAll('.vjs-playlist-item').length,
     playlist.length,
-    'displayed the correct number of items');
+    'displayed the correct number of items'
+  );
   assert.strictEqual(selectedItems.length, 1, 'marked one playlist item');
-  assert.strictEqual(selectedItems[0].querySelector('img').src,
+  assert.strictEqual(
+    selectedItems[0].querySelector('img').src,
     resolveUrl(playlist[1].thumbnail),
-    'marked the second playlist item');
+    'marked the second playlist item'
+  );
 });
 
 QUnit.test('selects no item if the playlist is not in use', function(assert) {
@@ -345,9 +375,11 @@ QUnit.test('selects no item if the playlist is not in use', function(assert) {
 
   this.player.trigger('loadstart');
 
-  assert.strictEqual(this.fixture.querySelectorAll('.vjs-playlist-item.vjs-selected').length,
+  assert.strictEqual(
+    this.fixture.querySelectorAll('.vjs-playlist-item.vjs-selected').length,
     0,
-    'no items selected');
+    'no items selected'
+  );
 });
 
 QUnit.test('updates on "playlistchange", different lengths', function(assert) {
@@ -466,15 +498,21 @@ QUnit.test('tracks when an ad is playing', function(assert) {
 
   const playlistMenu = this.player.playlistMenu;
 
-  assert.ok(!playlistMenu.hasClass('vjs-ad-playing'),
-    'does not have class vjs-ad-playing');
+  assert.ok(
+    !playlistMenu.hasClass('vjs-ad-playing'),
+    'does not have class vjs-ad-playing'
+  );
   this.player.trigger('adstart');
-  assert.ok(playlistMenu.hasClass('vjs-ad-playing'),
-    'has class vjs-ad-playing');
+  assert.ok(
+    playlistMenu.hasClass('vjs-ad-playing'),
+    'has class vjs-ad-playing'
+  );
 
   this.player.trigger('adend');
-  assert.ok(!playlistMenu.hasClass('vjs-ad-playing'),
-    'does not have class vjs-ad-playing');
+  assert.ok(
+    !playlistMenu.hasClass('vjs-ad-playing'),
+    'does not have class vjs-ad-playing'
+  );
 });
 
 // -----------
@@ -503,10 +541,14 @@ QUnit.test('changes the selection when tapped', function(assert) {
   // trigger a loadstart synchronously to simplify the test
   this.player.trigger('loadstart');
 
-  assert.ok(this.player.playlistMenu.items[1].hasClass('vjs-selected'),
-    'selected the new item');
-  assert.ok(!this.player.playlistMenu.items[0].hasClass('vjs-selected'),
-    'deselected the old item');
+  assert.ok(
+    this.player.playlistMenu.items[1].hasClass('vjs-selected'),
+    'selected the new item'
+  );
+  assert.ok(
+    !this.player.playlistMenu.items[0].hasClass('vjs-selected'),
+    'deselected the old item'
+  );
   assert.strictEqual(playCalled, true, 'play gets called if option is set');
 });
 
