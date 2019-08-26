@@ -1,3 +1,20 @@
+<a name="3.6.0"></a>
+# [3.6.0](https://github.com/brightcove/videojs-playlist-ui/compare/v3.5.2...v3.6.0) (2019-08-26)
+
+### Features
+
+* Add translations for localizable strings ([#107](https://github.com/brightcove/videojs-playlist-ui/issues/107)) ([96b5ef7](https://github.com/brightcove/videojs-playlist-ui/commit/96b5ef7))
+
+### Chores
+
+* **package:** Update dependencies to fix npm audit issues ([#106](https://github.com/brightcove/videojs-playlist-ui/issues/106)) ([ec20321](https://github.com/brightcove/videojs-playlist-ui/commit/ec20321))
+* **package:** update lint-staged to version 8.1.0 ([#91](https://github.com/brightcove/videojs-playlist-ui/issues/91)) ([afd859e](https://github.com/brightcove/videojs-playlist-ui/commit/afd859e))
+* **package:** update npm-run-all/videojs-generator-verify for security ([9c579e0](https://github.com/brightcove/videojs-playlist-ui/commit/9c579e0))
+* **package:** update rollup to version 0.67.3 ([#89](https://github.com/brightcove/videojs-playlist-ui/issues/89)) ([d969e5d](https://github.com/brightcove/videojs-playlist-ui/commit/d969e5d))
+* **package:** update videojs-generate-karma-config to version 5.0.0 ([#90](https://github.com/brightcove/videojs-playlist-ui/issues/90)) ([841cc2d](https://github.com/brightcove/videojs-playlist-ui/commit/841cc2d))
+* **package:** update videojs-generate-rollup-config to version 2.3.1 ([#92](https://github.com/brightcove/videojs-playlist-ui/issues/92)) ([ee3a461](https://github.com/brightcove/videojs-playlist-ui/commit/ee3a461))
+* **package:** update videojs-standard to version 8.0.2 ([#93](https://github.com/brightcove/videojs-playlist-ui/issues/93)) ([d9066ea](https://github.com/brightcove/videojs-playlist-ui/commit/d9066ea))
+
 <a name="3.5.2"></a>
 ## [3.5.2](https://github.com/brightcove/videojs-playlist-ui/compare/v3.5.1...v3.5.2) (2018-10-03)
 
