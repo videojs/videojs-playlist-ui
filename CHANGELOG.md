@@ -1,3 +1,14 @@
+<a name="3.7.0"></a>
+# [3.7.0](https://github.com/brightcove/videojs-playlist-ui/compare/v3.6.0...v3.7.0) (2020-02-08)
+
+### Features
+
+* **lang:** Add Arabic translations ([#121](https://github.com/brightcove/videojs-playlist-ui/issues/121)) ([2e820a3](https://github.com/brightcove/videojs-playlist-ui/commit/2e820a3))
+
+### Chores
+
+* **package:** Update all dev dependencies ([#122](https://github.com/brightcove/videojs-playlist-ui/issues/122)) ([90d6135](https://github.com/brightcove/videojs-playlist-ui/commit/90d6135))
+
 <a name="3.6.0"></a>
 # [3.6.0](https://github.com/brightcove/videojs-playlist-ui/compare/v3.5.2...v3.6.0) (2019-08-26)
 
