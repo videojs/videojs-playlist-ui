@@ -96,6 +96,15 @@ $placeholder-background-color: #303030;
     overflow: hidden;
   }
 
+  .vjs-playlist-description-visible {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;
+    font-size: 14px;
+    padding: 0 0 0 2px;
+  }
+
   .vjs-up-next-text {
     display: none;
     padding: .1rem 2px;

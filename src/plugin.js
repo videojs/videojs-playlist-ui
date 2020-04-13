@@ -199,6 +199,17 @@ class PlaylistMenuItem extends Component {
     titleEl.setAttribute('title', titleText);
     titleContainerEl.appendChild(titleEl);
 
+    // We add thumbnail video description only if specified in playlist options
+    if (item.showDescription) {
+      const descriptionEl = document.createElement('div');
+      const descriptionText = item.description || '';
+
+      descriptionEl.className = 'vjs-playlist-description-visible';
+      descriptionEl.appendChild(document.createTextNode(descriptionText));
+      descriptionEl.setAttribute('title', descriptionText);
+      titleContainerEl.appendChild(descriptionEl);
+    }
+
     return li;
   }
 }
