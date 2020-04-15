@@ -206,7 +206,7 @@ class PlaylistMenuItem extends Component {
       const descriptionEl = document.createElement('div');
       const descriptionText = item.description || '';
 
-      descriptionEl.className = 'vjs-playlist-description-visible';
+      descriptionEl.className = 'vjs-playlist-description';
       descriptionEl.appendChild(document.createTextNode(descriptionText));
       descriptionEl.setAttribute('title', descriptionText);
       titleContainerEl.appendChild(descriptionEl);

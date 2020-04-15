@@ -90,13 +90,7 @@ $placeholder-background-color: #303030;
     line-height: 20px;
   }
 
-  .vjs-playlist-description {
-    margin: 0;
-    text-overflow: ellipsis;
-    overflow: hidden;
-  }
-
-  .vjs-playlist-description-visible {
+  .vjs-playlist-description{
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
@@ -237,7 +231,7 @@ $placeholder-background-color: #303030;
   font-size: $base-font-size;
 
   .vjs-playlist-description {
-    height: $base-font-size * 3;
+    height: $base-font-size * 2;
     line-height: ceil($base-font-size * 1.5);
   }
 }
