@@ -1,3 +1,10 @@
+<a name="3.8.0"></a>
+# [3.8.0](https://github.com/brightcove/videojs-playlist-ui/compare/v3.7.0...v3.8.0) (2020-05-06)
+
+### Features
+
+* Enabling option to display video descriptions in playlist thumb… ([#129](https://github.com/brightcove/videojs-playlist-ui/issues/129)) ([b3fbc84](https://github.com/brightcove/videojs-playlist-ui/commit/b3fbc84))
+
 <a name="3.7.0"></a>
 # [3.7.0](https://github.com/brightcove/videojs-playlist-ui/compare/v3.6.0...v3.7.0) (2020-02-08)
 
