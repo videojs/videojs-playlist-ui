@@ -107,6 +107,7 @@ class PlaylistMenuItem extends Component {
       throw new Error('Cannot construct a PlaylistMenuItem without an item option');
     }
 
+    playlistItem.showDescription = settings.showDescription;
     super(player, playlistItem);
     this.item = playlistItem.item;
 
@@ -137,6 +138,7 @@ class PlaylistMenuItem extends Component {
   createEl() {
     const li = document.createElement('li');
     const item = this.options_.item;
+    const showDescription = this.options_.showDescription;
 
     if (typeof item.data === 'object') {
       const dataKeys = Object.keys(item.data);
@@ -198,6 +200,17 @@ class PlaylistMenuItem extends Component {
     titleEl.appendChild(document.createTextNode(titleText));
     titleEl.setAttribute('title', titleText);
     titleContainerEl.appendChild(titleEl);
+
+    // We add thumbnail video description only if specified in playlist options
+    if (showDescription) {
+      const descriptionEl = document.createElement('div');
+      const descriptionText = item.description || '';
+
+      descriptionEl.className = 'vjs-playlist-description';
+      descriptionEl.appendChild(document.createTextNode(descriptionText));
+      descriptionEl.setAttribute('title', descriptionText);
+      titleContainerEl.appendChild(descriptionEl);
+    }
 
     return li;
   }

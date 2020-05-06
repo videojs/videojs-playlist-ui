@@ -215,6 +215,32 @@ QUnit.test('includes the video name if provided', function(assert) {
   );
 });
 
+QUnit.test('includes the video description if user specifies it', function(assert) {
+  this.player.playlist(playlist);
+  this.player.playlistUi({showDescription: true});
+
+  const items = this.fixture.querySelectorAll('.vjs-playlist-item');
+
+  assert.strictEqual(
+    items[0].querySelector('.vjs-playlist-description').textContent,
+    playlist[0].description,
+    'description is displayed'
+  );
+});
+
+QUnit.test('hides video description by default', function(assert) {
+  this.player.playlist(playlist);
+  this.player.playlistUi();
+
+  const items = this.fixture.querySelectorAll('.vjs-playlist-item');
+
+  assert.strictEqual(
+    items[0].querySelector('.vjs-playlist-description'),
+    null,
+    'description is not displayed'
+  );
+});
+
 QUnit.test('includes custom data attribute if provided', function(assert) {
   this.player.playlist(playlist);
   this.player.playlistUi();
