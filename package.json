@@ -20,8 +20,7 @@
     "build:lang": "vjslang --dir dist/lang",
     "clean": "shx rm -rf ./dist ./test/dist",
     "postclean": "shx mkdir -p ./dist ./test/dist",
-    "docs": "npm-run-all docs:*",
-    "docs:toc": "doctoc README.md",
+    "docs": "doctoc README.md",
     "lint": "vjsstandard",
     "server": "karma start scripts/karma.conf.js --singleRun=false --auto-watch",
     "start": "npm-run-all -p server watch",
@@ -62,7 +61,7 @@
     "sinon": "^6.1.5",
     "videojs-generate-karma-config": "^5.3.1",
     "videojs-generate-postcss-config": "~2.0.1",
-    "videojs-generate-rollup-config": "^2.3.2",
+    "videojs-generate-rollup-config": "^7.0.0",
     "videojs-generator-verify": "^1.2.0",
     "videojs-languages": "^2.0.0",
     "videojs-playlist": "^4.3.1",
@@ -89,10 +88,6 @@
     "scripts/",
     "src/",
     "test/"
-  ],
-  "browserslist": [
-    "defaults",
-    "ie 11"
   ],
   "lint-staged": {
     "*.js": [
