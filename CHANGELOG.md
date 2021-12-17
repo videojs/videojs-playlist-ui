@@ -1,3 +1,16 @@
+<a name="4.0.0"></a>
+# [4.0.0](https://github.com/brightcove/videojs-playlist-ui/compare/v3.8.0...v4.0.0) (2021-12-17)
+
+### Chores
+
+* skip vjsverify es check ([#141](https://github.com/brightcove/videojs-playlist-ui/issues/141)) ([9c6944a](https://github.com/brightcove/videojs-playlist-ui/commit/9c6944a))
+* Update generate-rollup-config to drop older browser support ([#139](https://github.com/brightcove/videojs-playlist-ui/issues/139)) ([262acc6](https://github.com/brightcove/videojs-playlist-ui/commit/262acc6))
+
+
+### BREAKING CHANGES
+
+* This removes support for some older browsers like IE 11
+
 <a name="3.8.0"></a>
 # [3.8.0](https://github.com/brightcove/videojs-playlist-ui/compare/v3.7.0...v3.8.0) (2020-05-06)
 
