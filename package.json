@@ -33,7 +33,7 @@
     "watch:css": "npm run build:css:sass -- -w",
     "watch:js": "npm run build:js -- -w",
     "posttest": "shx cat test/dist/coverage/text.txt",
-    "prepublishOnly": "npm run build && vjsverify"
+    "prepublishOnly": "npm run build && vjsverify --skip-es-check"
   },
   "repository": {
     "type": "git",
