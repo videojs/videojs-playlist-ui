@@ -5,16 +5,6 @@ import {version as VERSION} from '../package.json';
 const dom = videojs.dom || videojs;
 const registerPlugin = videojs.registerPlugin || videojs.plugin;
 
-// Array#indexOf analog for IE8
-const indexOf = function(array, target) {
-  for (let i = 0, length = array.length; i < length; i++) {
-    if (array[i] === target) {
-      return i;
-    }
-  }
-  return -1;
-};
-
 // see https://github.com/Modernizr/Modernizr/blob/master/feature-detects/css/pointerevents.js
 const supportsCssPointerEvents = (() => {
   const element = document.createElement('x');
@@ -129,7 +119,7 @@ class PlaylistMenuItem extends Component {
   }
 
   switchPlaylistItem_(event) {
-    this.player_.playlist.currentItem(indexOf(this.player_.playlist(), this.item));
+    this.player_.playlist.currentItem(this.player_.playlist().indexOf(this.item));
     if (this.playOnSelect) {
       this.player_.play();
     }
@@ -303,9 +293,8 @@ class PlaylistMenu extends Component {
       list.appendChild(item.el_);
     }
 
-    // Inject the ad overlay. IE<11 doesn't support "pointer-events:
-    // none" so we use this element to block clicks during ad
-    // playback.
+    // Inject the ad overlay. We use this element to block clicks during ad
+    // playback and darken the menu to indicate inactivity
     if (!overlay) {
       overlay = document.createElement('li');
       overlay.className = 'vjs-playlist-ad-overlay';
