@@ -1,3 +1,10 @@
+<a name="4.0.1"></a>
+## [4.0.1](https://github.com/brightcove/videojs-playlist-ui/compare/v4.0.0...v4.0.1) (2022-02-11)
+
+### Chores
+
+* Remove IE-specific code and CSS ([#142](https://github.com/brightcove/videojs-playlist-ui/issues/142)) ([263d681](https://github.com/brightcove/videojs-playlist-ui/commit/263d681))
+
 <a name="4.0.0"></a>
 # [4.0.0](https://github.com/brightcove/videojs-playlist-ui/compare/v3.8.0...v4.0.0) (2021-12-17)
 
