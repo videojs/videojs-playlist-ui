@@ -20,6 +20,12 @@
     </p>
   </div>
 
+  <style>
+    .player-container, .vjs-playlist {
+      height: 300px;
+    }
+  </style>
+
   <div class="player-container">
     <video
       id="video"
@@ -96,12 +102,12 @@
       // you can use <picture> syntax to display responsive images
       thumbnail: [
         {
-          srcset: 'test/example/oceans.jpg',
+          srcset: 'test/example/oceans.jpg?2',
           type: 'image/jpeg',
           media: '(min-width: 400px;)'
         },
         {
-          src: 'test/example/oceans-low.jpg'
+          src: 'test/example/oceans-low.jpg?2'
         }
       ]
     },
@@ -126,12 +132,75 @@
       // you can use <picture> syntax to display responsive images
       thumbnail: [
         {
-          srcset: 'test/example/oceans.jpg',
+          srcset: 'test/example/oceans.jpg?3',
           type: 'image/jpeg',
           media: '(min-width: 400px;)'
         },
         {
-          src: 'test/example/oceans-low.jpg'
+          src: 'test/example/oceans-low.jpg?3'
+        }
+      ]
+    },
+    {
+      name: 'Disney\'s Oceans 4',
+      description: 'Abc.',
+      duration: 45,
+      sources: [
+        { src: 'http://vjs.zencdn.net/v/oceans.mp4?4', type: 'video/mp4' },
+        { src: 'http://vjs.zencdn.net/v/oceans.webm?4', type: 'video/webm' },
+      ],
+
+      // you can use <picture> syntax to display responsive images
+      thumbnail: [
+        {
+          srcset: 'test/example/oceans.jpg?4',
+          type: 'image/jpeg',
+          media: '(min-width: 400px;)'
+        },
+        {
+          src: 'test/example/oceans-low.jpg?4'
+        }
+      ]
+    },
+    {
+      name: 'Disney\'s Oceans 5',
+      description: 'Abc.',
+      duration: 45,
+      sources: [
+        { src: 'http://vjs.zencdn.net/v/oceans.mp4?5', type: 'video/mp4' },
+        { src: 'http://vjs.zencdn.net/v/oceans.webm?5', type: 'video/webm' },
+      ],
+
+      // you can use <picture> syntax to display responsive images
+      thumbnail: [
+        {
+          srcset: 'test/example/oceans.jpg?5',
+          type: 'image/jpeg',
+          media: '(min-width: 400px;)'
+        },
+        {
+          src: 'test/example/oceans-low.jpg?5'
+        }
+      ]
+    },
+    {
+      name: 'Disney\'s Oceans 6',
+      description: 'Abc.',
+      duration: 45,
+      sources: [
+        { src: 'http://vjs.zencdn.net/v/oceans.mp4?6', type: 'video/mp4' },
+        { src: 'http://vjs.zencdn.net/v/oceans.webm?6', type: 'video/webm' },
+      ],
+
+      // you can use <picture> syntax to display responsive images
+      thumbnail: [
+        {
+          srcset: 'test/example/oceans.jpg?6',
+          type: 'image/jpeg',
+          media: '(min-width: 400px;)'
+        },
+        {
+          src: 'test/example/oceans-low.jpg?6'
         }
       ]
     }, {
