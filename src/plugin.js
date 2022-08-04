@@ -56,6 +56,7 @@ const createThumbnail = function(thumbnail) {
     // simple thumbnails
     const img = document.createElement('img');
 
+    img.loading = 'lazy';
     img.src = thumbnail;
     img.alt = '';
     picture.appendChild(img);
@@ -79,6 +80,7 @@ const createThumbnail = function(thumbnail) {
     const variant = thumbnail[thumbnail.length - 1];
     const img = document.createElement('img');
 
+    img.loading = 'lazy';
     img.alt = '';
     for (const prop in variant) {
       img[prop] = variant[prop];
