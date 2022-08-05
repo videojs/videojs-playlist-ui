@@ -1,3 +1,10 @@
+<a name="4.1.0"></a>
+# [4.1.0](https://github.com/brightcove/videojs-playlist-ui/compare/v4.0.1...v4.1.0) (2022-08-05)
+
+### Features
+
+* Set lazy loading on images ([#143](https://github.com/brightcove/videojs-playlist-ui/issues/143)) ([b62182f](https://github.com/brightcove/videojs-playlist-ui/commit/b62182f))
+
 <a name="4.0.1"></a>
 ## [4.0.1](https://github.com/brightcove/videojs-playlist-ui/compare/v4.0.0...v4.0.1) (2022-02-11)
 
