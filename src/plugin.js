@@ -23,9 +23,11 @@ const defaults = {
 // so it won't conflict with `vjs-icon-play
 // since it'll get added when we mouse out
 const addSelectedClass = function(el) {
+  el.setAttribute('id', 'vjs-selected');
   el.addClass('vjs-selected');
 };
 const removeSelectedClass = function(el) {
+  el.removeAttribute('id', 'vjs-selected');
   el.removeClass('vjs-selected');
 
   if (el.thumbnail) {
