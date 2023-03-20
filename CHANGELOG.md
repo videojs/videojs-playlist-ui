@@ -1,3 +1,14 @@
+<a name="4.1.1"></a>
+## [4.1.1](https://github.com/brightcove/videojs-playlist-ui/compare/v4.0.1...v4.1.1) (2023-03-20)
+
+### Features
+
+* Set lazy loading on images ([#143](https://github.com/brightcove/videojs-playlist-ui/issues/143)) ([b62182f](https://github.com/brightcove/videojs-playlist-ui/commit/b62182f))
+
+### Code Refactoring
+
+* populate playlist thumbnail's alt tag with video title ([#146](https://github.com/brightcove/videojs-playlist-ui/issues/146)) ([b008a8e](https://github.com/brightcove/videojs-playlist-ui/commit/b008a8e))
+
 <a name="4.1.0"></a>
 # [4.1.0](https://github.com/brightcove/videojs-playlist-ui/compare/v4.0.1...v4.1.0) (2022-08-05)
 
