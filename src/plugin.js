@@ -193,6 +193,9 @@ class PlaylistMenuItem extends Component {
     titleEl.setAttribute('title', titleText);
     titleContainerEl.appendChild(titleEl);
 
+    // Populate thumbnails alt with the video title
+    this.thumbnail.getElementsByTagName('img').alt = titleText;
+
     // We add thumbnail video description only if specified in playlist options
     if (showDescription) {
       const descriptionEl = document.createElement('div');
