@@ -1,3 +1,14 @@
+<a name="4.2.0"></a>
+# [4.2.0](https://github.com/brightcove/videojs-playlist-ui/compare/v4.1.0...v4.2.0) (2023-04-14)
+
+### Chores
+
+* add v8 to dependencies list ([#147](https://github.com/brightcove/videojs-playlist-ui/issues/147)) ([840be2b](https://github.com/brightcove/videojs-playlist-ui/commit/840be2b))
+
+### Code Refactoring
+
+* populate playlist thumbnail's alt tag with video title ([#146](https://github.com/brightcove/videojs-playlist-ui/issues/146)) ([b008a8e](https://github.com/brightcove/videojs-playlist-ui/commit/b008a8e))
+
 <a name="4.1.1"></a>
 ## [4.1.1](https://github.com/brightcove/videojs-playlist-ui/compare/v4.0.1...v4.1.1) (2023-03-20)
 
