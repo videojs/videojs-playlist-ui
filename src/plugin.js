@@ -2,8 +2,8 @@ import document from 'global/document';
 import videojs from 'video.js';
 import {version as VERSION} from '../package.json';
 
-const dom = videojs.dom || videojs;
-const registerPlugin = videojs.registerPlugin || videojs.plugin;
+const dom = videojs.dom;
+const merge = videojs.obj ? videojs.obj.merge : videojs.mergeOptions;
 
 // see https://github.com/Modernizr/Modernizr/blob/master/feature-detects/css/pointerevents.js
 const supportsCssPointerEvents = (() => {
@@ -437,7 +437,7 @@ const playlistUi = function(options) {
     options = {el: options};
   }
 
-  options = videojs.mergeOptions(defaults, options);
+  options = merge(defaults, options);
 
   // If the player is already using this plugin, remove the pre-existing
   // PlaylistMenu, but retain the element and its location in the DOM because
@@ -479,7 +479,7 @@ videojs.registerComponent('PlaylistMenu', PlaylistMenu);
 videojs.registerComponent('PlaylistMenuItem', PlaylistMenuItem);
 
 // register the plugin
-registerPlugin('playlistUi', playlistUi);
+videojs.registerPlugin('playlistUi', playlistUi);
 
 playlistUi.VERSION = VERSION;
 
