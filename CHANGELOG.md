@@ -1,3 +1,15 @@
+<a name="4.2.1"></a>
+## [4.2.1](https://github.com/videojs/videojs-playlist-ui/compare/v4.2.0...v4.2.1) (2023-05-01)
+
+### Bug Fixes
+
+* Avoid triggering deprecation warning ([#149](https://github.com/videojs/videojs-playlist-ui/issues/149)) ([5facd9f](https://github.com/videojs/videojs-playlist-ui/commit/5facd9f))
+* resolve more deprecation warnings ([#150](https://github.com/videojs/videojs-playlist-ui/issues/150)) ([02dab88](https://github.com/videojs/videojs-playlist-ui/commit/02dab88))
+
+### Chores
+
+* Updated org in package.json ([#145](https://github.com/videojs/videojs-playlist-ui/issues/145)) ([726c97d](https://github.com/videojs/videojs-playlist-ui/commit/726c97d))
+
 <a name="4.2.0"></a>
 # [4.2.0](https://github.com/brightcove/videojs-playlist-ui/compare/v4.1.0...v4.2.0) (2023-04-14)
 
