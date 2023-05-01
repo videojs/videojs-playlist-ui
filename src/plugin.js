@@ -4,6 +4,7 @@ import {version as VERSION} from '../package.json';
 
 const dom = videojs.dom;
 const merge = videojs.obj ? videojs.obj.merge : videojs.mergeOptions;
+const formatTime = videojs.time ? videojs.time.formatTime : videojs.formatTime;
 
 // see https://github.com/Modernizr/Modernizr/blob/master/feature-detects/css/pointerevents.js
 const supportsCssPointerEvents = (() => {
@@ -152,7 +153,7 @@ class PlaylistMenuItem extends Component {
     // Duration
     if (item.duration) {
       const duration = document.createElement('time');
-      const time = videojs.formatTime(item.duration);
+      const time = formatTime(item.duration);
 
       duration.className = 'vjs-playlist-duration';
       duration.setAttribute('datetime', 'PT0H0M' + item.duration + 'S');

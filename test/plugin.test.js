@@ -42,8 +42,10 @@ QUnit.test('the environment is sane', function(assert) {
 });
 
 function setup() {
+  const merge = videojs.obj ? videojs.obj.merge : videojs.mergeOptions;
+
   this.oldVideojsBrowser = videojs.browser;
-  videojs.browser = videojs.mergeOptions({}, videojs.browser);
+  videojs.browser = merge({}, videojs.browser);
 
   this.fixture = document.querySelector('#qunit-fixture');
 
