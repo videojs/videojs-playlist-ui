@@ -94,7 +94,7 @@
       "git add"
     ],
     "README.md": [
-      "npm run docs:toc",
+      "npm run docs",
       "git add"
     ]
   },

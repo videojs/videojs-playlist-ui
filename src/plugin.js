@@ -433,11 +433,6 @@ const playlistUi = function(options) {
     throw new Error('videojs-playlist plugin is required by the videojs-playlist-ui plugin');
   }
 
-  if (dom.isEl(options)) {
-    videojs.log.warn('videojs-playlist-ui: Passing an element directly to playlistUi() is deprecated, use the "el" option instead!');
-    options = {el: options};
-  }
-
   options = merge(defaults, options);
 
   // If the player is already using this plugin, remove the pre-existing
