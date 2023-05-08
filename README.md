@@ -1,9 +1,5 @@
 # videojs-playlist-ui
 
-[![Build Status](https://travis-ci.org/brightcove/videojs-playlist-ui.svg?branch=master)](https://travis-ci.org/brightcove/videojs-playlist-ui)
-[![Greenkeeper badge](https://badges.greenkeeper.io/brightcove/videojs-playlist-ui.svg)](https://greenkeeper.io/)
-[![Slack Status](http://slack.videojs.com/badge.svg)](http://slack.videojs.com)
-
 [![NPM](https://nodei.co/npm/videojs-playlist-ui.png?downloads=true&downloadRank=true)](https://nodei.co/npm/videojs-playlist-ui/)
 
 A playlist video picker for video.js and videojs-playlist
@@ -12,7 +8,6 @@ Maintenance Status: Stable
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
 
 - [Getting Started](#getting-started)
 - [Root Element](#root-element)
@@ -31,20 +26,26 @@ Maintenance Status: Stable
 Include the plugin script in your page, and a placeholder list element with the class `vjs-playlist` to house the playlist menu:
 
 ```html
-<!-- Include the playlist menu styles somewhere in your page: -->
-<link href="videojs-playlist-ui.vertical.css" rel="stylesheet">
+<!-- Include the playlist menu styles somewhere in your page -->
+<link href="videojs-playlist-ui.css" rel="stylesheet">
 
-<!-- The playlist menu will be built automatically in here: -->
+<!-- Your player will be created here: -->
+<video-js data-setup='{}' controls></video-js>
+
+<!-- The playlist menu will be built automatically in here -->
 <div class="vjs-playlist"></div>
 
-<!-- Include video.js, the videojs-playlist plugin and this plugin: -->
+<!-- Include video.js, the videojs-playlist plugin and this plugin -->
 <script src="video.js"></script>
 <script src="videojs-playlist.js"></script>
 <script src="videojs-playlist-ui.js"></script>
 
 <script>
-  // Initialize the plugin and build the playlist!
-  videojs(document.querySelector('video')).playlistUi();
+  // Initialize the player
+  const player = videojs(document.querySelector('video-js'));
+
+  // Initialize the plugin and render the playlist
+  player.playlistUi();
 </script>
 ```
 
@@ -78,8 +79,6 @@ player.playlistUi({
 });
 ```
 
-> **NOTE:** Previously, the plugin supported passing the element in lieu of passing options. That feature is deprecated and will be removed in 4.0. Please use the `el` option going forward.
-
 ## Other Options
 
 The options passed to the plugin are passed to the internal `PlaylistMenu` [video.js Component][components]; so, you may pass in [any option][components-options] that is accepted by a component.
@@ -105,6 +104,6 @@ When this boolean is set to `true`, clicking on the playlist menu items will alw
 The `PlaylistMenu` automatically adapts to ad integrations based on [videojs-contrib-ads][contrib-ads]. When a linear ad is being played, the menu will darken and stop responding to click or touch events. If you'd prefer to allow your viewers to change videos during ad playback, you can override this behavior through CSS. You will also need to make sure that your ad integration is properly cancelled and cleaned up before switching -- consult the documentation for your ad library for details on how to do that.
 
 
-[components]: https://github.com/videojs/video.js/blob/master/docs/guides/components.md
-[components-options]: https://github.com/videojs/video.js/blob/master/docs/guides/options.md#component-options
+[components]: https://videojs.com/guides/components/
+[components-options]: https://videojs.com/guides/components/#using-options
 [contrib-ads]: https://github.com/videojs/videojs-contrib-ads

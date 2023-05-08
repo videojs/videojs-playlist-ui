@@ -99,19 +99,6 @@ QUnit.test('is empty if the playlist plugin isn\'t initialized', function(assert
   assert.strictEqual(items.length, 0, 'displayed no items');
 });
 
-QUnit.test('can be initialized with an element (deprecated form)', function(assert) {
-  const elem = dom.createEl('div');
-
-  this.player.playlist(playlist);
-  this.player.playlistUi(elem);
-
-  assert.strictEqual(
-    elem.querySelectorAll('li.vjs-playlist-item').length,
-    playlist.length,
-    'created an element for each playlist item'
-  );
-});
-
 QUnit.test('can be initialized with an element', function(assert) {
   const elem = dom.createEl('div');
 
