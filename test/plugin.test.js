@@ -2,6 +2,7 @@
 import document from 'global/document';
 import window from 'global/window';
 import QUnit from 'qunit';
+import sinon from 'sinon';
 import videojs from 'video.js';
 
 import 'videojs-playlist';
@@ -34,7 +35,6 @@ const resolveUrl = url => {
   return a.href;
 };
 
-const dom = videojs.dom || videojs;
 const Html5 = videojs.getTech('Html5');
 
 QUnit.test('the environment is sane', function(assert) {
@@ -42,10 +42,8 @@ QUnit.test('the environment is sane', function(assert) {
 });
 
 function setup() {
-  const merge = videojs.obj ? videojs.obj.merge : videojs.mergeOptions;
-
   this.oldVideojsBrowser = videojs.browser;
-  videojs.browser = merge({}, videojs.browser);
+  videojs.browser = videojs.obj.merge({}, videojs.browser);
 
   this.fixture = document.querySelector('#qunit-fixture');
 
@@ -65,8 +63,8 @@ function setup() {
   this.player = videojs(video);
 
   // Create two playlist container elements.
-  this.fixture.appendChild(dom.createEl('div', {className: 'vjs-playlist'}));
-  this.fixture.appendChild(dom.createEl('div', {className: 'vjs-playlist'}));
+  this.fixture.appendChild(videojs.dom.createEl('div', {className: 'vjs-playlist'}));
+  this.fixture.appendChild(videojs.dom.createEl('div', {className: 'vjs-playlist'}));
 }
 
 function teardown() {
@@ -74,7 +72,7 @@ function teardown() {
   Html5.isSupported = this.realIsHtmlSupported;
   this.player.dispose();
   this.player = null;
-  dom.emptyEl(this.fixture);
+  videojs.dom.emptyEl(this.fixture);
 }
 
 QUnit.module('videojs-playlist-ui', {beforeEach: setup, afterEach: teardown});
@@ -84,10 +82,12 @@ QUnit.test('registers itself', function(assert) {
 });
 
 QUnit.test('errors if used without the playlist plugin', function(assert) {
-  assert.throws(function() {
-    this.player.playlist = null;
-    this.player.playlistUi();
-  }, 'threw on init');
+  sinon.spy(this.player.log, 'error');
+
+  this.player.playlist = null;
+  this.player.playlistUi();
+
+  assert.ok(this.player.log.error.calledOnce, 'player.log.error was called');
 });
 
 QUnit.test('is empty if the playlist plugin isn\'t initialized', function(assert) {
@@ -100,7 +100,7 @@ QUnit.test('is empty if the playlist plugin isn\'t initialized', function(assert
 });
 
 QUnit.test('can be initialized with an element', function(assert) {
-  const elem = dom.createEl('div');
+  const elem = videojs.dom.createEl('div');
 
   this.player.playlist(playlist);
   this.player.playlistUi({el: elem});
@@ -118,7 +118,7 @@ QUnit.test('can look for an element with the class "vjs-playlist" that is not al
 
   // Give the firstEl a child, so the plugin thinks it is in use and moves on
   // to the next one.
-  firstEl.appendChild(dom.createEl('div'));
+  firstEl.appendChild(videojs.dom.createEl('div'));
 
   this.player.playlist(playlist);
   this.player.playlistUi();
@@ -132,12 +132,12 @@ QUnit.test('can look for an element with the class "vjs-playlist" that is not al
 });
 
 QUnit.test('can look for an element with a custom class that is not already in use', function(assert) {
-  const firstEl = dom.createEl('div', {className: 'super-playlist'});
-  const secondEl = dom.createEl('div', {className: 'super-playlist'});
+  const firstEl = videojs.dom.createEl('div', {className: 'super-playlist'});
+  const secondEl = videojs.dom.createEl('div', {className: 'super-playlist'});
 
   // Give the firstEl a child, so the plugin thinks it is in use and moves on
   // to the next one.
-  firstEl.appendChild(dom.createEl('div'));
+  firstEl.appendChild(videojs.dom.createEl('div'));
 
   this.fixture.appendChild(firstEl);
   this.fixture.appendChild(secondEl);
