@@ -96,16 +96,12 @@ class PlaylistUI extends Plugin {
    */
   findRoot_(className) {
     const all = document.querySelectorAll('.' + className);
-    let el;
 
     for (let i = 0; i < all.length; i++) {
       if (!this.hasChildEls_(all[i])) {
-        el = all[i];
-        break;
+        return all[i];
       }
     }
-
-    return el;
   }
 }
 
