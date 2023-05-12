@@ -52,18 +52,7 @@ class PlaylistMenu extends Component {
     }
 
     this.on(player, ['loadstart', 'playlistchange', 'playlistsorted'], (e) => {
-
-      // The playlistadd and playlistremove events are handled separately. These
-      // also fire the playlistchange event with an `action` property, so can
-      // exclude them here.
-      if (e.type === 'playlistchange' && ['add', 'remove'].includes(e.action)) {
-        return;
-      }
       this.update();
-    });
-
-    this.on(player, ['playlistadd', 'playlistremove'], (e) => {
-
     });
 
     // Keep track of whether an ad is playing so that the menu
