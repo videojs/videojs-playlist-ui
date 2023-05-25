@@ -158,16 +158,25 @@ class PlaylistMenu extends Component {
    */
   addItems_(index, count) {
     const playlist = this.player_.playlist();
-    const items = playlist.slice(index, count);
+    const items = playlist.slice(index, count + index);
 
     if (!items.length) {
       return;
     }
 
-    const menuItems = items.map(i => {
-      return new PlaylistMenuItem(this.player_, {
-        item: playlist[i]
-      }, this.options_);
+    const listEl = this.el_.querySelector('.vjs-playlist-item-list');
+    const listNodes = this.el_.querySelectorAll('.vjs-playlist-item');
+
+    // When appending to the list, `insertBefore` will only reliably accept
+    // `null` as the second argument, so we need to explicitly fall back to it.
+    const refNode = listNodes[index] || null;
+
+    const menuItems = items.map((item, i) => {
+      const menuItem = new PlaylistMenuItem(this.player_, {item}, this.options_);
+
+      listEl.insertBefore(menuItem.el_, refNode);
+
+      return menuItem;
     });
 
     this.items.splice(index, 0, ...menuItems);
@@ -185,7 +194,7 @@ class PlaylistMenu extends Component {
    *         THe number of items to remove.
    */
   removeItems_(index, count) {
-    const components = this.items.slice(index, count);
+    const components = this.items.slice(index, count + index);
 
     if (!components.length) {
       return;

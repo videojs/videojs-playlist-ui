@@ -631,3 +631,239 @@ QUnit.test('disposing the player also disposes the playlist menu', function(asse
   assert.strictEqual(this.fixture.querySelectorAll('.vjs-playlist').length, 1, 'only the unused playlist container is left');
   assert.strictEqual(this.player.playlistMenu, null, 'the playlistMenu property is null');
 });
+
+QUnit.module('videojs-playlist-ui: add/remove', {beforeEach: setup, afterEach: teardown});
+
+QUnit.test('adding zero items at the start of the playlist', function(assert) {
+  this.player.playlist(playlist);
+  this.player.playlistUi();
+
+  let items = this.fixture.querySelectorAll('.vjs-playlist-item');
+
+  assert.strictEqual(items.length, 2, 'two items initially');
+
+  this.player.playlist.add([], 0);
+  items = this.fixture.querySelectorAll('.vjs-playlist-item');
+  assert.strictEqual(items.length, playlist.length, 'correct number of items');
+});
+
+QUnit.test('adding one item at the start of the playlist', function(assert) {
+  this.player.playlist(playlist);
+  this.player.playlistUi();
+
+  let items = this.fixture.querySelectorAll('.vjs-playlist-item');
+
+  assert.strictEqual(items.length, 2, 'two items initially');
+
+  this.player.playlist.add({name: 'Test 1'}, 0);
+  items = this.fixture.querySelectorAll('.vjs-playlist-item');
+  assert.strictEqual(items.length, 3, 'correct number of items');
+  assert.strictEqual(items[0].querySelector('.vjs-playlist-name').textContent, 'Test 1', 'has the correct name in the playlist DOM');
+});
+
+QUnit.test('adding two items at the start of the playlist', function(assert) {
+  this.player.playlist(playlist);
+  this.player.playlistUi();
+
+  let items = this.fixture.querySelectorAll('.vjs-playlist-item');
+
+  assert.strictEqual(items.length, 2, 'two items initially');
+
+  this.player.playlist.add([{name: 'Test 1'}, {name: 'Test 2'}], 0);
+  items = this.fixture.querySelectorAll('.vjs-playlist-item');
+  assert.strictEqual(items.length, 4, 'correct number of items');
+  assert.strictEqual(items[0].querySelector('.vjs-playlist-name').textContent, 'Test 1', 'has the correct name in the playlist DOM');
+  assert.strictEqual(items[1].querySelector('.vjs-playlist-name').textContent, 'Test 2', 'has the correct name in the playlist DOM');
+});
+
+QUnit.test('adding one item in the middle of the playlist', function(assert) {
+  this.player.playlist(playlist);
+  this.player.playlistUi();
+
+  let items = this.fixture.querySelectorAll('.vjs-playlist-item');
+
+  assert.strictEqual(items.length, 2, 'two items initially');
+
+  this.player.playlist.add({name: 'Test 1'}, 1);
+  items = this.fixture.querySelectorAll('.vjs-playlist-item');
+  assert.strictEqual(items.length, 3, 'correct number of items');
+  assert.strictEqual(items[1].querySelector('.vjs-playlist-name').textContent, 'Test 1', 'has the correct name in the playlist DOM');
+});
+
+QUnit.test('adding two items in the middle of the playlist', function(assert) {
+  this.player.playlist(playlist);
+  this.player.playlistUi();
+
+  let items = this.fixture.querySelectorAll('.vjs-playlist-item');
+
+  assert.strictEqual(items.length, 2, 'two items initially');
+
+  this.player.playlist.add([{name: 'Test 1'}, {name: 'Test 2'}], 1);
+  items = this.fixture.querySelectorAll('.vjs-playlist-item');
+  assert.strictEqual(items.length, 4, 'correct number of items');
+  assert.strictEqual(items[1].querySelector('.vjs-playlist-name').textContent, 'Test 1', 'has the correct name in the playlist DOM');
+  assert.strictEqual(items[2].querySelector('.vjs-playlist-name').textContent, 'Test 2', 'has the correct name in the playlist DOM');
+});
+
+QUnit.test('adding one item at the end of the playlist', function(assert) {
+  this.player.playlist(playlist);
+  this.player.playlistUi();
+
+  let items = this.fixture.querySelectorAll('.vjs-playlist-item');
+
+  assert.strictEqual(items.length, 2, 'two items initially');
+
+  this.player.playlist.add({name: 'Test 1'}, playlist.length);
+  items = this.fixture.querySelectorAll('.vjs-playlist-item');
+  assert.strictEqual(items.length, 3, 'correct number of items');
+  assert.strictEqual(items[2].querySelector('.vjs-playlist-name').textContent, 'Test 1', 'has the correct name in the playlist DOM');
+});
+
+QUnit.test('adding two items at the end of the playlist', function(assert) {
+  this.player.playlist(playlist);
+  this.player.playlistUi();
+
+  let items = this.fixture.querySelectorAll('.vjs-playlist-item');
+
+  assert.strictEqual(items.length, 2, 'two items initially');
+
+  this.player.playlist.add([{name: 'Test 1'}, {name: 'Test 2'}], playlist.length);
+  items = this.fixture.querySelectorAll('.vjs-playlist-item');
+  assert.strictEqual(items.length, 4, 'correct number of items');
+  assert.strictEqual(items[2].querySelector('.vjs-playlist-name').textContent, 'Test 1', 'has the correct name in the playlist DOM');
+  assert.strictEqual(items[3].querySelector('.vjs-playlist-name').textContent, 'Test 2', 'has the correct name in the playlist DOM');
+});
+
+QUnit.test('removing zero items at the start of the playlist', function(assert) {
+  this.player.playlist(playlist);
+  this.player.playlistUi();
+
+  let items = this.fixture.querySelectorAll('.vjs-playlist-item');
+
+  assert.strictEqual(items.length, 2, 'two items initially');
+
+  this.player.playlist.remove(0, 0);
+  items = this.fixture.querySelectorAll('.vjs-playlist-item');
+  assert.strictEqual(items.length, playlist.length, 'correct number of items');
+});
+
+QUnit.test('removing one item at the start of the playlist', function(assert) {
+  this.player.playlist(playlist);
+  this.player.playlistUi();
+
+  let items = this.fixture.querySelectorAll('.vjs-playlist-item');
+
+  assert.strictEqual(items.length, 2, 'two items initially');
+
+  this.player.playlist.add({name: 'Test 1'}, 0);
+  items = this.fixture.querySelectorAll('.vjs-playlist-item');
+
+  assert.strictEqual(items.length, 3, 'correct number of items');
+
+  this.player.playlist.remove(0, 1);
+  items = this.fixture.querySelectorAll('.vjs-playlist-item');
+
+  assert.strictEqual(items.length, 2, 'correct number of items');
+  assert.notStrictEqual(items[0].querySelector('.vjs-playlist-name').textContent, 'Test 1', 'the added item was properly removed from the DOM');
+});
+
+QUnit.test('removing two items at the start of the playlist', function(assert) {
+  this.player.playlist(playlist);
+  this.player.playlistUi();
+
+  let items = this.fixture.querySelectorAll('.vjs-playlist-item');
+
+  assert.strictEqual(items.length, 2, 'two items initially');
+
+  this.player.playlist.add([{name: 'Test 1'}, {name: 'Test 2'}], 0);
+  items = this.fixture.querySelectorAll('.vjs-playlist-item');
+
+  assert.strictEqual(items.length, 4, 'correct number of items');
+
+  this.player.playlist.remove(0, 2);
+  items = this.fixture.querySelectorAll('.vjs-playlist-item');
+
+  assert.notStrictEqual(items[0].querySelector('.vjs-playlist-name').textContent, 'Test 1', 'the added item was properly removed from the DOM');
+  assert.notStrictEqual(items[1].querySelector('.vjs-playlist-name').textContent, 'Test 2', 'the added item was properly removed from the DOM');
+});
+
+QUnit.test('removing one item in the middle of the playlist', function(assert) {
+  this.player.playlist(playlist);
+  this.player.playlistUi();
+
+  let items = this.fixture.querySelectorAll('.vjs-playlist-item');
+
+  assert.strictEqual(items.length, 2, 'two items initially');
+
+  this.player.playlist.add({name: 'Test 1'}, 1);
+  items = this.fixture.querySelectorAll('.vjs-playlist-item');
+
+  assert.strictEqual(items.length, 3, 'correct number of items');
+
+  this.player.playlist.remove(1, 1);
+  items = this.fixture.querySelectorAll('.vjs-playlist-item');
+
+  assert.strictEqual(items.length, 2, 'correct number of items');
+  assert.notStrictEqual(items[1].querySelector('.vjs-playlist-name').textContent, 'Test 1', 'the added item was properly removed from the DOM');
+});
+
+QUnit.test('removing two items in the middle of the playlist', function(assert) {
+  this.player.playlist(playlist);
+  this.player.playlistUi();
+
+  let items = this.fixture.querySelectorAll('.vjs-playlist-item');
+
+  assert.strictEqual(items.length, 2, 'two items initially');
+
+  this.player.playlist.add([{name: 'Test 1'}, {name: 'Test 2'}], 1);
+  items = this.fixture.querySelectorAll('.vjs-playlist-item');
+
+  assert.strictEqual(items.length, 4, 'correct number of items');
+
+  this.player.playlist.remove(1, 2);
+  items = this.fixture.querySelectorAll('.vjs-playlist-item');
+
+  assert.notStrictEqual(items[1].querySelector('.vjs-playlist-name').textContent, 'Test 1', 'the added item was properly removed from the DOM');
+  assert.strictEqual(items[2], undefined, 'the added item was properly removed from the DOM');
+});
+
+QUnit.test('removing one item at the end of the playlist', function(assert) {
+  this.player.playlist(playlist);
+  this.player.playlistUi();
+
+  let items = this.fixture.querySelectorAll('.vjs-playlist-item');
+
+  assert.strictEqual(items.length, 2, 'two items initially');
+
+  this.player.playlist.add({name: 'Test 1'}, 2);
+  items = this.fixture.querySelectorAll('.vjs-playlist-item');
+
+  assert.strictEqual(items.length, 3, 'correct number of items');
+
+  this.player.playlist.remove(2, 1);
+  items = this.fixture.querySelectorAll('.vjs-playlist-item');
+
+  assert.strictEqual(items.length, 2, 'correct number of items');
+  assert.notStrictEqual(items[1].querySelector('.vjs-playlist-name').textContent, 'Test 1', 'the added item was properly removed from the DOM');
+});
+
+QUnit.test('removing two items at the end of the playlist', function(assert) {
+  this.player.playlist(playlist);
+  this.player.playlistUi();
+
+  let items = this.fixture.querySelectorAll('.vjs-playlist-item');
+
+  assert.strictEqual(items.length, 2, 'two items initially');
+
+  this.player.playlist.add([{name: 'Test 1'}, {name: 'Test 2'}], 2);
+  items = this.fixture.querySelectorAll('.vjs-playlist-item');
+
+  assert.strictEqual(items.length, 4, 'correct number of items');
+
+  this.player.playlist.remove(2, 2);
+  items = this.fixture.querySelectorAll('.vjs-playlist-item');
+
+  assert.strictEqual(items.length, 2, 'correct number of items');
+  assert.notStrictEqual(items[1].querySelector('.vjs-playlist-name').textContent, 'Test 1', 'the added item was properly removed from the DOM');
+  assert.notStrictEqual(items[1].querySelector('.vjs-playlist-name').textContent, 'Test 2', 'the added item was properly removed from the DOM');
+});
