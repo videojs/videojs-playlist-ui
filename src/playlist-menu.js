@@ -154,7 +154,7 @@ class PlaylistMenu extends Component {
    *         The index at which to start adding items.
    *
    * @param  {number} count
-   *         THe number of items to add.
+   *         The number of items to add.
    */
   addItems_(index, count) {
     const playlist = this.player_.playlist();
@@ -171,7 +171,7 @@ class PlaylistMenu extends Component {
     // `null` as the second argument, so we need to explicitly fall back to it.
     const refNode = listNodes[index] || null;
 
-    const menuItems = items.map((item, i) => {
+    const menuItems = items.map((item) => {
       const menuItem = new PlaylistMenuItem(this.player_, {item}, this.options_);
 
       listEl.insertBefore(menuItem.el_, refNode);
@@ -191,7 +191,7 @@ class PlaylistMenu extends Component {
    *         The index at which to start removing items.
    *
    * @param  {number} count
-   *         THe number of items to remove.
+   *         The number of items to remove.
    */
   removeItems_(index, count) {
     const components = this.items.slice(index, count + index);
