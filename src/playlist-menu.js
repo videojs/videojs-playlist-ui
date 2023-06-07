@@ -52,8 +52,18 @@ class PlaylistMenu extends Component {
     }
 
     this.on(player, ['loadstart', 'playlistchange', 'playlistsorted'], (e) => {
+
+      // The playlistadd and playlistremove events are handled separately. These
+      // also fire the playlistchange event with an `action` property, so can
+      // exclude them here.
+      if (e.type === 'playlistchange' && ['add', 'remove'].includes(e.action)) {
+        return;
+      }
       this.update();
     });
+
+    this.on(player, ['playlistadd'], (e) => this.addItems_(e.index, e.count));
+    this.on(player, ['playlistremove'], (e) => this.removeItems_(e.index, e.count));
 
     // Keep track of whether an ad is playing so that the menu
     // appearance can be adapted appropriately
@@ -132,6 +142,66 @@ class PlaylistMenu extends Component {
         videojs.dom.addClass(thumbnail, 'vjs-playlist-now-playing');
       }
     }
+  }
+
+  /**
+   * Adds a number of playlist items to the UI.
+   *
+   * Each item that was added to the underlying playlist in a certain range
+   * has a new PlaylistMenuItem created for it.
+   *
+   * @param  {number} index
+   *         The index at which to start adding items.
+   *
+   * @param  {number} count
+   *         The number of items to add.
+   */
+  addItems_(index, count) {
+    const playlist = this.player_.playlist();
+    const items = playlist.slice(index, count + index);
+
+    if (!items.length) {
+      return;
+    }
+
+    const listEl = this.el_.querySelector('.vjs-playlist-item-list');
+    const listNodes = this.el_.querySelectorAll('.vjs-playlist-item');
+
+    // When appending to the list, `insertBefore` will only reliably accept
+    // `null` as the second argument, so we need to explicitly fall back to it.
+    const refNode = listNodes[index] || null;
+
+    const menuItems = items.map((item) => {
+      const menuItem = new PlaylistMenuItem(this.player_, {item}, this.options_);
+
+      listEl.insertBefore(menuItem.el_, refNode);
+
+      return menuItem;
+    });
+
+    this.items.splice(index, 0, ...menuItems);
+  }
+
+  /**
+   * Removes a number of playlist items from the UI.
+   *
+   * Each PlaylistMenuItem component is disposed properly.
+   *
+   * @param  {number} index
+   *         The index at which to start removing items.
+   *
+   * @param  {number} count
+   *         The number of items to remove.
+   */
+  removeItems_(index, count) {
+    const components = this.items.slice(index, count + index);
+
+    if (!components.length) {
+      return;
+    }
+
+    components.forEach(c => c.dispose());
+    this.items.splice(index, count);
   }
 
   update() {
