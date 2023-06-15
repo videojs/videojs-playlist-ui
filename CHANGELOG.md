@@ -1,3 +1,21 @@
+<a name="5.0.0"></a>
+# [5.0.0](https://github.com/videojs/videojs-playlist-ui/compare/v4.2.1...v5.0.0) (2023-06-15)
+
+### Features
+
+* convert the plugin to a class-based plugin ([#152](https://github.com/videojs/videojs-playlist-ui/issues/152)) ([edc9f84](https://github.com/videojs/videojs-playlist-ui/commit/edc9f84))
+* remove deprecated ability to pass an element as options ([#151](https://github.com/videojs/videojs-playlist-ui/issues/151)) ([7ed8ba4](https://github.com/videojs/videojs-playlist-ui/commit/7ed8ba4))
+* support playlistadd and playlistremove events ([#154](https://github.com/videojs/videojs-playlist-ui/issues/154)) ([dc5f0fb](https://github.com/videojs/videojs-playlist-ui/commit/dc5f0fb))
+
+### Chores
+
+* do not run tests on npm version ([#155](https://github.com/videojs/videojs-playlist-ui/issues/155)) ([b10ed12](https://github.com/videojs/videojs-playlist-ui/commit/b10ed12))
+
+
+### BREAKING CHANGES
+
+* Reimplements the plugin as a class-based plugin. Likely a non-breaking change for simple implementations, but this does change how things work if the plugin is re-initialized.
+
 <a name="4.2.1"></a>
 ## [4.2.1](https://github.com/videojs/videojs-playlist-ui/compare/v4.2.0...v4.2.1) (2023-05-01)
 
