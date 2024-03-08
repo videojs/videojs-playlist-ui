@@ -40,7 +40,7 @@ class PlaylistUI extends Plugin {
   constructor(player, options) {
     super(player, options);
 
-    if (!player.usingPlugin('playlist')) {
+    if (!player.usingPlugin('playlistPlugin')) {
       player.log.error('videojs-playlist plugin is required by the videojs-playlist-ui plugin');
       return;
     }

@@ -55,7 +55,7 @@ const createThumbnail = function(thumbnail) {
 
 class PlaylistMenuItem extends Component {
 
-  constructor(player, playlistItem, settings) {
+  constructor(player, playlistPlugin, playlistItem, settings) {
     if (!playlistItem.item) {
       throw new Error('Cannot construct a PlaylistMenuItem without an item option');
     }
@@ -63,6 +63,7 @@ class PlaylistMenuItem extends Component {
     playlistItem.showDescription = settings.showDescription;
     super(player, playlistItem);
     this.item = playlistItem.item;
+    this.playlistPlugin = playlistPlugin;
 
     this.playOnSelect = settings.playOnSelect;
 
@@ -82,7 +83,7 @@ class PlaylistMenuItem extends Component {
   }
 
   switchPlaylistItem_(event) {
-    this.player_.playlist.currentItem(this.player_.playlist().indexOf(this.item));
+    this.playlistPlugin.loadPlaylistItem(this.playlistPlugin.playlist_.get().indexOf(this.item));
     if (this.playOnSelect) {
       this.player_.play();
     }
