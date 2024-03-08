@@ -45,6 +45,8 @@ class PlaylistMenu extends Component {
       this.addClass('vjs-csspointerevents');
     }
 
+    this.playlistPlugin = this.player_.playlistPlugin();
+
     this.createPlaylist_();
 
     if (!videojs.browser.TOUCH_ENABLED) {
@@ -52,6 +54,8 @@ class PlaylistMenu extends Component {
     }
 
     this.on(player, ['loadstart', 'playlistchange', 'playlistsorted'], (e) => {
+
+      console.log()
 
       // The playlistadd and playlistremove events are handled separately. These
       // also fire the playlistchange event with an `action` property, so can
@@ -97,7 +101,7 @@ class PlaylistMenu extends Component {
   }
 
   createPlaylist_() {
-    const playlist = this.player_.playlist() || [];
+    const playlist =  this.playlistPlugin.playlist_.get() || [];
     let list = this.el_.querySelector('.vjs-playlist-item-list');
     let overlay = this.el_.querySelector('.vjs-playlist-ad-overlay');
 
@@ -111,7 +115,7 @@ class PlaylistMenu extends Component {
 
     // create new items
     for (let i = 0; i < playlist.length; i++) {
-      const item = new PlaylistMenuItem(this.player_, {
+      const item = new PlaylistMenuItem(this.player_, this.playlistPlugin, {
         item: playlist[i]
       }, this.options_);
 
@@ -131,7 +135,7 @@ class PlaylistMenu extends Component {
     }
 
     // select the current playlist item
-    const selectedIndex = this.player_.playlist.currentItem();
+    const selectedIndex = this.playlistPlugin.playlist_.getCurrentIndex();
 
     if (this.items.length && selectedIndex >= 0) {
       addSelectedClass(this.items[selectedIndex]);
@@ -157,7 +161,7 @@ class PlaylistMenu extends Component {
    *         The number of items to add.
    */
   addItems_(index, count) {
-    const playlist = this.player_.playlist();
+    const playlist = this.playlistPlugin.playlist_.get();
     const items = playlist.slice(index, count + index);
 
     if (!items.length) {
@@ -206,7 +210,7 @@ class PlaylistMenu extends Component {
 
   update() {
     // replace the playlist items being displayed, if necessary
-    const playlist = this.player_.playlist();
+    const playlist = this.playlistPlugin.playlist_.get();
 
     if (this.items.length !== playlist.length) {
       // if the menu is currently empty or the state is obviously out
@@ -225,7 +229,7 @@ class PlaylistMenu extends Component {
     }
 
     // the playlist itself is unchanged so just update the selection
-    const currentItem = this.player_.playlist.currentItem();
+    const currentItem = this.playlistPlugin.playlist_.getCurrentIndex();
 
     for (let i = 0; i < this.items.length; i++) {
       const item = this.items[i];
